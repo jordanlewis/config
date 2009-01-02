@@ -1,0 +1,2 @@
+PS1="${CYAN}[%h%1(j.%%%j.)%0(?..:${HIRED}%?)${CYAN}]${HIBLUE}%# ${NORM}"
+RPS1="${CYAN}%~${NORM}"
