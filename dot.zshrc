@@ -115,10 +115,11 @@ alias slurp='wget -r --no-parent'
 alias deflac='for file in *.flac; do $(flac -cd "$file" | lame -V 0 --vbr-new - "${file%.flac}.mp3"); done'   # convert all flacs in directory to v0
 # }}}
 # Shells {{{
+alias bh='ssh root@bughouse.econnectix.com'
 alias bhsec='ssh jlewis@bhsec.bard.edu'
 alias ch='ssh root@cheaphotel.econnectix.com'
 #alias chana='ssh jlewis@192.168.0.3'           # chana, my mbp.. need dyndns
-alias cs='ssh jalewis@silver-star.cs.uchicago.edu'
+alias cs='ssh jalewis@sirius.cs.uchicago.edu'
 alias echoduet='ssh jlewis@echoduet.net'
 alias econ='ssh jlewis@mail.econnectix.com'
 #alias enwina='ssh -X 192.168.0.2'               # This is/was my HP
@@ -142,6 +143,7 @@ alias broadcast='ifconfig | grep broadcast | tail -c 16'
 alias cls='perl -e "print \"\e[2J\""' # prints a clearscreen - for termcast
 alias dp="darcs pull && darcs push" # double duh
 alias dr="darcs record"          # duh
+alias duf='du -sk * | sort -n | perl -ne '\''($s,$f)=split(m{\t});for (qw(K M G)) {if($s<1024) {printf("%.1f",$s);print "$_\t$f"; last};$s=$s/1024}'\'
 alias dwn="darcs whatsnew"       # quick alias to see what's changed
 alias hide='xset dpms force standby; exit' # kills my LCD monitor
 alias l='ls'                     # sometimes I think I'm still on a MUD/MOO
@@ -170,3 +172,4 @@ alias -g W='|wc'                 # cat biglongfile W
 # Print to stdout {{{
 fortune 2>/dev/null || return 0 # essential!
 # }}}
+alias dotperl='rsync -av lib/* ~/.perl/'
