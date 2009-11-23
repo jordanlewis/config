@@ -20,8 +20,8 @@ set background=light  " Dark term bg (but bg=dark is gross)
 set hlsearch          " Hilight /search results!
 set incsearch         " do incremental searching
 set lazyredraw        " don't redraw screen during macros and stuff
-set list              " Display listchars (see below)!        
-set listchars=tab:>=,trail:$ " display tabs as >==== and trailing spaces as $
+set list              " Display listchars (see below)
+set listchars=tab:>=,trail:_ " display tabs as >==== and trailing spaces as $
 set matchtime=3       " 3/10 of a second for showmatch
 set noicon            " Weird GUI thing. Want none!
 set nomore            " No spacing through messages!
@@ -218,6 +218,7 @@ highlight PmenuSbar  ctermbg=cyan
 highlight PmenuThumb ctermfg=red
 highlight Folded     ctermbg=black ctermfg=darkgreen
 highlight Search     None          ctermfg=lightred
+highlight Comment    ctermfg=darkgray
 
 let python_hilight_all=1
 

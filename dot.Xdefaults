@@ -1,7 +1,5 @@
 xterm*AllowIconInput:   on
 xterm*AutoRaise:        on
-xterm*Background:       black
-xterm*Foreground:       white
 xterm*TextUnderIcon:    on
 xterm*borderWidth:      1
 xterm*loginShell:       true
@@ -12,6 +10,8 @@ xterm*scrollKey:        true
 xterm*scrollTtyOutput:  false
 xterm*termtype:         xterm-256color
 xterm*ttyModes:         intr ^c erase ^h susp ^@ dsusp ^@ kill ^u eof ^d
+xterm*background:black
+xterm*foreground:white
 
 *VT100*numLock:        	true
 *VT100*color4:          blue3
@@ -21,6 +21,7 @@ URxvt*background:black
 URxvt*borderWidth:1
 URxvt*cursorColor:white
 URxvt*foreground:white
+URxvt*imLocale:en_US.UTF-8
 URxvt*loginShell:true
 URxvt*perl-ext-common:default
 URxvt*pointerColor2:black
@@ -35,6 +36,8 @@ URxvt*tripleclickwords:true
 URxvt*urlLauncher:firefox
 URxvt*utmpInhibit:false
 URxvt*visualBell:true
+#URxvt*font:-*-profont-*-*-*-*-14-*-*-*-*-*-*-*
+
 
 xclock*Background:      light grey
 xclock*Border:          navy blue
