@@ -1,0 +1,29 @@
+# General options {{{
+activity "%c: activity in window %n%f %t!" # Displays when I set a watch
+bell_msg ""          # DIE
+defutf8 on           # Allow utf characters
+maptimeout 50        # Finally get rid of the damn escape timeout!!!
+nethack on           # Use funny nethack messages
+nonblock on          # Good things
+startup_message off  # No annoying copyright message.
+#deflogin on          # Emulates a login shell so I get my path
+# }}}
+# 256 Color xterm {{{
+# terminfo and termcap for nice 256 color terminal
+# allow bold colors - necessary for some reason
+# attrcolor b ".I"
+# tell screen how to set colors. AB = background, AF=foreground
+# termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# defbce "on" # erase background with current bg color
+# }}}
+# Captions {{{
+#caption always '%-w%{.wB}%n %t%{-}%+w %=%{.w} %H: %l %{-}%d/%m %c'
+#caption always '%{kW}%?%F%{+b}%?%c %m/%d%{-b} | %0L=%-Lw%{+b}%50L>%n*%f %t%{-}%+Lw%-0=%{-}'
+# }}}
+# Bindkeys {{{
+bind ) resize 20 # Nice split size
+bind + resize +1 # Split adjustment
+bind - resize -1 # Split adjustment
+# Following is essential: lets normal backspace ( in vim) work as backspace and not print a char.
+#bindkey -d -k kb stuff \010
+# }}}
