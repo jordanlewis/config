@@ -40,8 +40,11 @@ else
 fi
 export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PILOTRATE=115200        # Some weird baud crap for my palm pilot dock
-export MANPAGER='vimmanpager'            # Use a prettier manpager
+#export MANPAGER='vimmanpager'            # Use a prettier manpager
 export PERL5LIB='/Users/jlewis/.perl/'
+export GOROOT=/Users/jlewis/go
+export GOOS=darwin
+export GOARCH=amd64
 
 # }}}
 # Declarations {{{
