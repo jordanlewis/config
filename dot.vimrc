@@ -206,7 +206,12 @@ au Filetype java setlocal omnifunc=javacomplete#Complete
 " }}}
 " Use levdes syntax for .des files {{{
 au BufRead,BufNewFile *.des set syntax=levdes
+au BufRead,BufNewFile *.frag,*.vert,*.fp,*.vp,*.glsl set syntax=glsl
 " }}}
+" Don't expand tabs in Go files {{{
+au BufRead,BufNewFile *.go set noexpandtab
+" }}}
+
 " }}}
 " }}}
 " Colors {{{
