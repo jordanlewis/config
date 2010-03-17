@@ -171,6 +171,7 @@ alias -g T='|tail'               # cat biglongfile T
 alias -g W='|wc'                 # cat biglongfile W
 # }}}
 # }}}
+PATH=/home/jlewis/bin:/usr/local/bin/:$PATH
 
 # Print to stdout {{{
 fortune 2>/dev/null || return 0 # essential!
