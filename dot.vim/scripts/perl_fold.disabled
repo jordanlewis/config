@@ -1,0 +1,11 @@
+function GetPerlFold()
+   if getline(v:lnum) =~ '^\s*sub'
+      return ">1"
+   elseif getline(v:lnum + 2) =~ '^\s*sub' && getline(v:lnum + 1) =~ '^\s*$'
+      return "<1"
+   else
+      return "="
+   endif
+endfunction
+setlocal foldexpr=GetPerlFold()
+setlocal foldmethod=expr 

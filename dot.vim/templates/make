@@ -1,0 +1,17 @@
+CFLAGS = -std=c99 -Wall -pedantic -g
+
+NAME = 
+
+all: $(NAME) tags
+
+$(NAME): $(NAME).o
+	gcc $(CFLAGS) $(NAME).o -o $(NAME)
+
+$(NAME).o: $(NAME).c $(NAME).h
+	gcc -c $(NAME).c
+
+tags:
+	ctags $(NAME).c $(NAME).h
+
+clean:
+	rm -f $(NAME) $(NAME).o
