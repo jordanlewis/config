@@ -1,7 +1,7 @@
 " toft's .vimrc
 " For Great Justice!
 " Settings {{{
-" General {{{ 
+" General {{{
 set autowrite          " Flush to disk when using :make and stuff
 set backspace=indent,eol,start " Allow backspacing over everything
 set confirm            " Confirm various potentially dangerous actions
@@ -10,7 +10,7 @@ set magic              " Allows extended regexes
 set nocompatible       " Don't use Vi settings!
 set noerrorbells       " No annoying beeping
 set noinsertmode       " Don't make Vim insert-only! Weirdo!
-set shell=/bin/bash    " zsh screws up 
+set shell=/bin/bash    " zsh screws up
 set ttimeoutlen=50     " 50 milliseconds for esc timeout instead of 1000
 set ttyfast            " We are always going to be using a fast terminal.
 filetype plugin indent on " File type detection on, (cindent for .c etc)
@@ -29,7 +29,7 @@ set nonumber          " Don't display line numbers on the side
 set notitle           " Don't display name of file and stuff in term title
 set report=0          " Show a 'N lines were changed' report always
 set ruler             " Show current cursor position
-set rulerformat=%40(%=%t%h%m%r%w%<\ (%n)\ %4.7l,%-7.(%c%V%)\ %P%)
+set rulerformat=%50.50(%=%t\ %#MoreMsg#%{GitBranchInfoString()}%#Normal#%H%M%R%W%<\ (%n)\ %l,%(%c%V%)\ %P%)
                       " Giant ruler stolen from doy
 set scrolloff=3       " Scroll screen at 3 lines from top/bottom
 
@@ -85,7 +85,7 @@ let g:EnhCommentifyRespectIndent = 'Yes' " indent where I want you to indent
 imap  <Esc>xpa
 "}}}
 " Map Q to format line {{{
-map Q gq 
+map Q gq
 " }}}
 " Insert a single char (space unused in cmd mode) {{{
 nmap <Space> i<Space><Esc>r
@@ -107,8 +107,8 @@ nnoremap <C-P> :bp<Enter>
 " }}}
 " Autocommands {{{
 " Send .vimrc, .zshrc, and templates to shells after I edit them. {{{
-au BufWritePost ~/.vimrc !~/bin/scp-to-shells ~/.vimrc
-au BufWritePost ~/.zshrc !~/bin/scp-to-shells ~/.zshrc
+"au BufWritePost ~/.vimrc !~/bin/scp-to-shells ~/.vimrc
+"au BufWritePost ~/.zshrc !~/bin/scp-to-shells ~/.zshrc
 " }}}
 " Jump to last known cursor position on file edit {{{
 au BufReadPost *
@@ -206,7 +206,6 @@ au Filetype java setlocal omnifunc=javacomplete#Complete
 " }}}
 " Use levdes syntax for .des files {{{
 au BufRead,BufNewFile *.des set syntax=levdes
-au BufRead,BufNewFile *.frag,*.vert,*.fp,*.vp,*.glsl set syntax=glsl
 " }}}
 " Don't expand tabs in Go files {{{
 au BufRead,BufNewFile *.go set noexpandtab
@@ -329,5 +328,8 @@ let g:SuperTabDefaultCompletionType = 'context'
 " }}}
 " }}}
 
+let g:git_branch_status_text=""
+let g:git_branch_status_nogit=""
+let g:git_branch_status_head_current=1
 set udf
 " vim:fdm=marker commentstring="%s
