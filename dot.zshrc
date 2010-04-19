@@ -33,18 +33,16 @@ SAVEHIST=7000                     # When to save to the file?
 export SHELL=`which zsh`                 # New shells don't open bash
 export EDITOR=vim                        # Use vim!
 export GREP_OPTIONS='--color=auto'       # Color my greps
+export GOROOT=$HOME/go
+export GOOS=linux
+export GOARCH=386
 if [ $(uname) = Linux ]; then 
     alias ls='ls --color=auto'
 else
     export CLICOLOR=1
 fi
 export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
-export PILOTRATE=115200        # Some weird baud crap for my palm pilot dock
-#export MANPAGER='vimmanpager'            # Use a prettier manpager
 export PERL5LIB='/Users/jlewis/.perl/'
-export GOROOT=/Users/jlewis/go
-export GOOS=darwin
-export GOARCH=amd64
 
 # }}}
 # Declarations {{{
@@ -86,6 +84,9 @@ zle -N copy-earlier-word
 # }}}
 # Zstyles {{{
 zstyle ':completion::complete:*' use-cache 1 # uses completion cache
+zstyle ':completion::complete:*' cache-path ~/.zshcache
+zstyle ':completion:*' menu select # menu-style completion
+zstyle ':completion:*:functions' ignored-patterns '_*' # no missing completions
 # }}}
 # Bindkeys {{{
 bindkey -v                       # Use vim bindings
@@ -122,7 +123,7 @@ alias bh='ssh root@bughouse.econnectix.com'
 alias bhsec='ssh jlewis@bhsec.bard.edu'
 alias ch='ssh root@cheaphotel.econnectix.com'
 #alias chana='ssh jlewis@192.168.0.3'           # chana, my mbp.. need dyndns
-alias cs='ssh jalewis@sirius.cs.uchicago.edu'
+alias cs='ssh jalewis@silver-star.cs.uchicago.edu'
 alias echoduet='ssh jlewis@echoduet.net'
 alias econ='ssh jlewis@mail.econnectix.com'
 #alias enwina='ssh -X 192.168.0.2'               # This is/was my HP
@@ -144,10 +145,7 @@ alias 'web'='python -m SimpleHTTPServer' # hosts . on :8000
 alias bc='bc -q -l'              # no warranty thing; loads math lib
 alias broadcast='ifconfig | grep broadcast | tail -c 16'
 alias cls='perl -e "print \"\e[2J\""' # prints a clearscreen - for termcast
-alias dp="darcs pull && darcs push" # double duh
-alias dr="darcs record"          # duh
 alias duf='du -sk * | sort -n | perl -ne '\''($s,$f)=split(m{\t});for (qw(K M G)) {if($s<1024) {printf("%.1f",$s);print "$_\t$f"; last};$s=$s/1024}'\'
-alias dwn="darcs whatsnew"       # quick alias to see what's changed
 alias hide='xset dpms force standby; exit' # kills my LCD monitor
 alias l='ls'                     # sometimes I think I'm still on a MUD/MOO
 alias mouse='xmodmap -e "pointer = 1 2 3 6 7 8 9 10 4 5"' # fixes my buttons
@@ -171,7 +169,6 @@ alias -g T='|tail'               # cat biglongfile T
 alias -g W='|wc'                 # cat biglongfile W
 # }}}
 # }}}
-PATH=/home/jlewis/bin:/usr/local/bin/:$PATH
 
 # Print to stdout {{{
 fortune 2>/dev/null || return 0 # essential!
