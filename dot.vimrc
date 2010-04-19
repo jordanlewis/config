@@ -29,7 +29,7 @@ set nonumber          " Don't display line numbers on the side
 set notitle           " Don't display name of file and stuff in term title
 set report=0          " Show a 'N lines were changed' report always
 set ruler             " Show current cursor position
-set rulerformat=%50.50(%=%t\ %#MoreMsg#%{GitBranchInfoString()}%#Normal#%H%M%R%W%<\ (%n)\ %l,%(%c%V%)\ %P%)
+set rulerformat=%50(%=%t\ %#MoreMsg#%{GitBranch()}%#Normal#%H%M%R%W%<\ (%n)\ %l,%(%c%V%)\ %P%)
                       " Giant ruler stolen from doy
 set scrolloff=3       " Scroll screen at 3 lines from top/bottom
 
@@ -328,8 +328,5 @@ let g:SuperTabDefaultCompletionType = 'context'
 " }}}
 " }}}
 
-let g:git_branch_status_text=""
-let g:git_branch_status_nogit=""
-let g:git_branch_status_head_current=1
 set udf
 " vim:fdm=marker commentstring="%s
