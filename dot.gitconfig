@@ -1,5 +1,10 @@
 [user]
-	name = Jordan Lewis
 	email = jordanthelewis@gmail.com
+	name = Jordan Lewis
 [color]
+	branch = auto
+	status = auto
+	diff = auto
 	ui = auto
+[github]
+	user = jordanlewis
