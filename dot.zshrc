@@ -45,9 +45,6 @@ export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PERL5LIB='/Users/jlewis/.perl/'
 
 # }}}
-# Declarations {{{
-declare -x DISPLAY=":0.0" # So I can always run X apps
-# }}}
 # Setopts {{{
 setopt auto_cd             # If I type a directory, assume I mean to cd to it
 setopt auto_pushd          # Automatically push directories onto the stack
