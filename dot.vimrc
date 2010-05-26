@@ -29,8 +29,7 @@ set nonumber          " Don't display line numbers on the side
 set notitle           " Don't display name of file and stuff in term title
 set report=0          " Show a 'N lines were changed' report always
 set ruler             " Show current cursor position
-set rulerformat=%50(%=%t\ %#MoreMsg#%{GitBranch()}%#Normal#%H%M%R%W%<\ (%n)\ %l,%(%c%V%)\ %P%)
-                      " Giant ruler stolen from doy
+set rulerformat=%25(%=%M%R\ (%n)%l,%c\ %P%)
 set scrolloff=3       " Scroll screen at 3 lines from top/bottom
 
 " o overwrite message for writing a file with subsequent message
