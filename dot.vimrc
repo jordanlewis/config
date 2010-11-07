@@ -329,4 +329,5 @@ let g:SuperTabDefaultCompletionType = 'context'
 " }}}
 
 set udf
+set undodir=~/.vim/undo
 " vim:fdm=marker commentstring="%s
