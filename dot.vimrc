@@ -116,9 +116,9 @@ au BufReadPost *
 \ endif
 " }}}
 " Auto +x {{{
-au BufWritePost *.sh !/bin/bash -c 'if [ -x % ]; then exit; else /bin/chmod +x %; fi'
-au BufWritePost *.pl !/bin/bash -c 'if [ -x % ]; then exit; else /bin/chmod +x %; fi'
-au BufWritePost *.py !/bin/bash -c 'if [ -x % ]; then exit; else /bin/chmod +x %; fi'
+au BufWritePost *.sh silent !/bin/bash -c 'if [ -x % ]; then exit; else /bin/chmod +x %; fi'
+au BufWritePost *.pl silent !/bin/bash -c 'if [ -x % ]; then exit; else /bin/chmod +x %; fi'
+au BufWritePost *.py silent !/bin/bash -c 'if [ -x % ]; then exit; else /bin/chmod +x %; fi'
 "}}}
 " Language specific things (Thanks doy!) {{{
 " Perl {{{
