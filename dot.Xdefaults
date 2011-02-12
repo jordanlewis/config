@@ -33,7 +33,7 @@ URxvt*scrollTtyKeypress:true
 URxvt*scrollTtyOutput:false
 URxvt*termType:rxvt-unicode
 URxvt*tripleclickwords:true
-URxvt*urlLauncher:firefox
+URxvt*urlLauncher:google-chrome
 URxvt*utmpInhibit:false
 URxvt*visualBell:true
 #URxvt*font:-*-profont-*-*-*-*-14-*-*-*-*-*-*-*
