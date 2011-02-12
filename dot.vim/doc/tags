@@ -43,6 +43,7 @@
 :TlistUndebug	taglist.txt	/*:TlistUndebug*
 :TlistUnlock	taglist.txt	/*:TlistUnlock*
 :TlistUpdate	taglist.txt	/*:TlistUpdate*
+:UB	histwin.txt	/*:UB*
 Align-copyright	Align.txt	/*Align-copyright*
 CreateBundleSnippet	snippets_emu.txt	/*CreateBundleSnippet*
 CreateSnippet	snippets_emu.txt	/*CreateSnippet*
@@ -218,6 +219,16 @@ glvs-install	pi_getscript.txt	/*glvs-install*
 glvs-options	pi_getscript.txt	/*glvs-options*
 glvs-plugins	pi_getscript.txt	/*glvs-plugins*
 glvs-usage	pi_getscript.txt	/*glvs-usage*
+histwin-browse	histwin.txt	/*histwin-browse*
+histwin-color	histwin.txt	/*histwin-color*
+histwin-config	histwin.txt	/*histwin-config*
+histwin-contents	histwin.txt	/*histwin-contents*
+histwin-copyright	histwin.txt	/*histwin-copyright*
+histwin-history	histwin.txt	/*histwin-history*
+histwin-keys	histwin.txt	/*histwin-keys*
+histwin-plugin	histwin.txt	/*histwin-plugin*
+histwin-var	histwin.txt	/*histwin-var*
+histwin.txt	histwin.txt	/*histwin.txt*
 java-parser-history	javacomplete.txt	/*java-parser-history*
 javacomplete-ast	javacomplete.txt	/*javacomplete-ast*
 javacomplete-commands	javacomplete.txt	/*javacomplete-commands*
