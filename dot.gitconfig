@@ -1,10 +1,22 @@
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore
 [user]
-	email = jordanthelewis@gmail.com
-	name = Jordan Lewis
-[color]
-	branch = auto
-	status = auto
-	diff = auto
-	ui = auto
+    email = jordanthelewis@gmail.com
+    name = Jordan Lewis
 [github]
-	user = jordanlewis
+    user = jordanlewis
+[color]
+    ui = auto
+[alias]
+    ci = commit
+    co = checkout
+
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+
+    changes = diff --name-status -r
+    diffstat = diff --stat -r
+
+    who = shortlog -s --
+    whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+    whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
