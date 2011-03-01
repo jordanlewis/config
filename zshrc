@@ -43,6 +43,7 @@ else
 fi
 export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PERL5LIB='/Users/jlewis/.perl/'
+export PATH=~/bin:$PATH
 
 # }}}
 # Setopts {{{
