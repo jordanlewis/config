@@ -45,7 +45,7 @@ build: bundles
 bundles: $(BUNDLES)
 
 clean:
-	@echo Cleaning from $(HOME)
+	@echo Cleaning from $(DEST)
 	rm -f $(TARGETS)
 
 .PHONY: build install clean
