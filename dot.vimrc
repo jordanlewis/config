@@ -1,5 +1,5 @@
-" toft's .vimrc
-" For Great Justice!
+" .vimrc by Jordan Lewis
+"
 " Settings {{{
 " General {{{
 set autowrite          " Flush to disk when using :make and stuff
@@ -77,6 +77,7 @@ set dict=/usr/share/dict/words
 set tildeop           " Turn ~ into an operator
 let g:EnhCommentifyBindInInsert = 'No' " No enhancedcommentify in insert mode
 let g:EnhCommentifyRespectIndent = 'Yes' " indent where I want you to indent
+set switchbuf " Jump to open window containing jump target if available
 "}}}
 " }}}
 " Mappings {{{
