@@ -1,30 +1,30 @@
-[submodule "dot.vim/bundle/vim-unimpaired"]
-	path = dot.vim/bundle/vim-unimpaired
+[submodule "vim/bundle/vim-unimpaired"]
+	path = vim/bundle/vim-unimpaired
 	url = git://github.com/tpope/vim-unimpaired.git
-[submodule "dot.vim/bundle/vim-fugitive"]
-	path = dot.vim/bundle/vim-fugitive
+[submodule "vim/bundle/vim-fugitive"]
+	path = vim/bundle/vim-fugitive
 	url = git://github.com/tpope/vim-fugitive.git
-[submodule "dot.vim/bundle/vim-surround"]
-	path = dot.vim/bundle/vim-surround
+[submodule "vim/bundle/vim-surround"]
+	path = vim/bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule "dot.vim/bundle/vim-endwise"]
-	path = dot.vim/bundle/vim-endwise
+[submodule "vim/bundle/vim-endwise"]
+	path = vim/bundle/vim-endwise
 	url = git://github.com/tpope/vim-endwise.git
-[submodule "dot.vim/bundle/histwin.vim"]
-	path = dot.vim/bundle/histwin.vim
+[submodule "vim/bundle/histwin.vim"]
+	path = vim/bundle/histwin.vim
 	url = git://github.com/vim-scripts/histwin.vim.git
-[submodule "dot.vim/bundle/EnhCommentify.vim"]
-	path = dot.vim/bundle/EnhCommentify.vim
+[submodule "vim/bundle/EnhCommentify.vim"]
+	path = vim/bundle/EnhCommentify.vim
 	url = git://github.com/vim-scripts/EnhCommentify.vim.git
-[submodule "dot.vim/bundle/matchit"]
-	path = dot.vim/bundle/matchit
+[submodule "vim/bundle/matchit"]
+	path = vim/bundle/matchit
 	url = git://github.com/vim-scripts/matchit.zip.git
-[submodule "dot.vim/bundle/OmniCppComplete"]
-	path = dot.vim/bundle/OmniCppComplete
+[submodule "vim/bundle/OmniCppComplete"]
+	path = vim/bundle/OmniCppComplete
 	url = git://github.com/vim-scripts/OmniCppComplete.git
-[submodule "dot.vim/bundle/vim-git"]
-	path = dot.vim/bundle/vim-git
+[submodule "vim/bundle/vim-git"]
+	path = vim/bundle/vim-git
 	url = git://github.com/tpope/vim-git.git
-[submodule "dot.vim/bundle/Color-Sample-Pack"]
-	path = dot.vim/bundle/Color-Sample-Pack
+[submodule "vim/bundle/Color-Sample-Pack"]
+	path = vim/bundle/Color-Sample-Pack
 	url = git://github.com/vim-scripts/Color-Sampler-Pack.git
