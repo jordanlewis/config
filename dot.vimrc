@@ -3,13 +3,16 @@
 " Settings {{{
 " General {{{
 set autowrite          " Flush to disk when using :make and stuff
+set autoread           " Reload safely if outside change detected
 set backspace=indent,eol,start " Allow backspacing over everything
 set confirm            " Confirm various potentially dangerous actions
+set gdefault           " use s///g by default - s///gg to reverse
 set hidden             " Enable hidden buffers - :bn w/ changes!
 set magic              " Allows extended regexes
 set nocompatible       " Don't use Vi settings!
 set noerrorbells       " No annoying beeping
-set noinsertmode       " Don't make Vim insert-only! Weirdo!
+set nojoinspaces       " Don't put extra spaces on joining sentences.
+set nostartofline      " Don't move to start of line on buffer next
 set shell=/bin/bash    " zsh screws up
 set ttimeoutlen=50     " 50 milliseconds for esc timeout instead of 1000
 set ttyfast            " We are always going to be using a fast terminal.
@@ -17,13 +20,13 @@ filetype plugin indent on " File type detection on, (cindent for .c etc)
 " }}}
 " Appearance {{{
 set background=light  " Dark term bg (but bg=dark is gross)
+set display=lastline  " Display as much of the last line as possible, not @
 set hlsearch          " Hilight /search results!
 set incsearch         " do incremental searching
 set lazyredraw        " don't redraw screen during macros and stuff
 set list              " Display listchars (see below)
-set listchars=tab:>=,trail:_ " display tabs as >==== and trailing spaces as $
-set matchtime=3       " 3/10 of a second for showmatch
-set noicon            " Weird GUI thing. Want none!
+set listchars=tab:>=,trail:_ " display tabs as >==== and trailing spaces as _
+set matchtime=1       " 1/10 of a second for showmatch
 set nomore            " No spacing through messages!
 set nonumber          " Don't display line numbers on the side
 set notitle           " Don't display name of file and stuff in term title
@@ -79,37 +82,39 @@ let g:EnhCommentifyBindInInsert = 'No' " No enhancedcommentify in insert mode
 let g:EnhCommentifyRespectIndent = 'Yes' " indent where I want you to indent
 set switchbuf=useopen " Jump to open window containing jump target if available
 "}}}
+" Persistent undo {{{
+if exists("+undofile")
+    set udf
+    set undodir=~/.vim/undo
+endif
+" }}}
 " }}}
 " Mappings {{{
-" Use <C-t> like irssi to transpose characters in insert mode {{{
-imap  <Esc>xpa
-"}}}
-" Map Q to format line {{{
+" Map Q to format line
 map Q gq
-" }}}
-" Insert a single char (space unused in cmd mode) {{{
-nmap <Space> i<Space><Esc>r
-" }}}
-" {{{ F5 -> toggle :set paste
+
+" Make space pagedown
+nmap <Space> <C-D>
+
+" F5 -> toggle :set paste
 set pastetoggle=<f5>
-" }}}
-" F11 -> spellcheck hilighting on {{{
+
+" F11 -> spellcheck hilighting on
 map <F11> :call <SID>spell()<CR>
 imap <F11> <Esc>:call <SID>spell()<CR>
-" }}}
-" F12 -> toggle :set number {{{
+
+" F12 -> toggle :set number
 map <F12> :set number!<CR>
-" }}}
-" Make ctrl-n and ctrl-p cycle through buffers in cmd mode {{{
+
+" Make ctrl-n and ctrl-p cycle through buffers in cmd mode
 nnoremap <C-N> :bn<Enter>
 nnoremap <C-P> :bp<Enter>
-" }}}
+
+" :w!! sudo-saves the current buffer
+cmap w!! w !sudo tee % >/dev/null
+
 " }}}
 " Autocommands {{{
-" Send .vimrc, .zshrc, and templates to shells after I edit them. {{{
-"au BufWritePost ~/.vimrc !~/bin/scp-to-shells ~/.vimrc
-"au BufWritePost ~/.zshrc !~/bin/scp-to-shells ~/.zshrc
-" }}}
 " Jump to last known cursor position on file edit {{{
 au BufReadPost *
 \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -329,6 +334,4 @@ let g:SuperTabDefaultCompletionType = 'context'
 " }}}
 " }}}
 
-set udf
-set undodir=~/.vim/undo
 " vim:fdm=marker commentstring="%s
