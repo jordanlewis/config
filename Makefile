@@ -2,6 +2,7 @@ DEST = $(HOME)
 
 CONFIGS = \
 Xdefaults \
+Xmodmap \
 config/awesome/rc.lua \
 gitconfig \
 screenrc \
