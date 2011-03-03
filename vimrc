@@ -85,7 +85,7 @@ set switchbuf=useopen " Jump to open window containing jump target if available
 " Persistent undo {{{
 if exists("+undofile")
     set udf
-    set undodir=~/.vim/undo
+    set undodir=~/.vimundo
 endif
 " }}}
 " }}}
