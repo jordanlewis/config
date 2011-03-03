@@ -25,14 +25,19 @@ vim-git \
 vim-surround \
 vim-unimpaired \
 
+DIRNAMES = .vimundo .config/awesome
 
 TARGETS = $(patsubst %,$(DEST)/.%,$(CONFIGS))
+DIRS    = $(patsubst %,$(DEST)/.%,$(DIRNAMES))
 
 BUNDLES = $(patsubst %,vim/bundle/%/.git,$(BUNDLEFILES))
 
 all: build
 
-install: build $(TARGETS)
+dirs: $(DIRS)
+	mkdir -p $(DIRS)
+
+install: build dirs $(TARGETS)
 
 $(DEST)/.% : %
 	@[ ! -e $@ ] || [ -h $@ ] || mv -f $@ $@.bak
