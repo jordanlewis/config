@@ -20,7 +20,13 @@ function git_info {
 
 function git_path {
     if zgit_isgit; then
-        name=$(git rev-parse --show-toplevel)
+        wd=$(pwd)
+        cdup=$(git rev-parse --show-cdup)
+        if [ -z "$cdup" ]; then cdup="."; fi
+        cd $cdup
+        name=$(pwd)
+        cd $wd
+
         if zgit_isworktreeclean; then
             color=$GREEN
         else
