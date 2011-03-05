@@ -9,11 +9,12 @@ screenrc \
 vim \
 vimrc \
 zprofile \
+zsh \
 zshenv \
 zshprompt \
 zshrc
 
-BUNDLEFILES = \
+VIMBUNDLEFILES = \
 Color-Sample-Pack \
 EnhCommentify.vim \
 histwin.vim \
@@ -25,30 +26,39 @@ vim-git \
 vim-surround \
 vim-unimpaired \
 
-DIRNAMES = .vimundo .config/awesome
+ZSHBUNDLEFILES = zsh-git
+
+DIRNAMES = vimundo
 
 TARGETS = $(patsubst %,$(DEST)/.%,$(CONFIGS))
 DIRS    = $(patsubst %,$(DEST)/.%,$(DIRNAMES))
 
-BUNDLES = $(patsubst %,vim/bundle/%/.git,$(BUNDLEFILES))
+VIMBUNDLES = $(patsubst %,vim/bundle/%/.git,$(VIMBUNDLEFILES))
+ZSHBUNDLES = $(patsubst %,zsh/func/%/.git,$(ZSHBUNDLEFILES))
 
 all: build
-
-dirs: $(DIRS)
-	mkdir -p $(DIRS)
 
 install: build dirs $(TARGETS)
 
 $(DEST)/.% : %
+	@mkdir -p $(dir $@)
 	@[ ! -e $@ ] || [ -h $@ ] || mv -f $@ $@.bak
 	ln -sf $(PWD)/$* $@
+
+$(DEST)/.%/:
+	mkdir -p $@
+
+dirs: $(DIRS)
 
 vim/bundle/%/.git:
 	git submodule update --init --recursive $(patsubst %/.git,%,$@)
 
+zsh/func/%/.git:
+	git submodule update --init --recursive $(patsubst %/.git/%,$@)
+
 build: bundles
 
-bundles: $(BUNDLES)
+bundles: $(VIMBUNDLES) $(ZSHBUNDLES)
 
 clean:
 	@echo Cleaning from $(DEST)
