@@ -1,2 +1,36 @@
-PS1="${CYAN}[%h%1(j.%%%j.)%0(?..:${HIRED}%?)${CYAN}]${HIBLUE}%# ${NORM}"
-RPS1="${CYAN}%~${NORM}"
+function git_info {
+    return;
+    zgit_isgit || return
+
+    #if ! zgit_isindexclean; then
+    #    echo -n "${GREEN}+"
+    #fi
+
+    echo -n "${RED}"
+    #if ! zgit_isworktreeclean; then
+    #    echo -n '!'
+    #fi
+    #if zgit_hasunmerged; then
+    #    echo -n '*'
+    #fi
+    #if zgit_hasuntracked; then
+    #    echo -n '?'
+    #fi
+}
+
+function git_path {
+    if zgit_isgit; then
+        name=$(git rev-parse --show-toplevel)
+        if zgit_isworktreeclean; then
+            color=$GREEN
+        else
+            color=$RED
+        fi
+        echo ${${$(print -P %d)/${name}/${name:h}${color}${name:t}${CYAN}}/${HOME}/\~/}
+    else
+        echo $(print -P %~)
+    fi
+}
+
+PS1='${YELLOW}[%T${CYAN}%1(j.%%${GREEN}%j${CYAN}.)%0(?..:${HIRED}%?)${YELLOW}]${CYAN}$(git_info)${CYAN}%# ${NORM}'
+RPS1='${CYAN}%n@%m:$(git_path)${NORM}'

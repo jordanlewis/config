@@ -1,31 +1,5 @@
-# toft's .zshrc
-# For Great Justice!
+# .zshrc by Jordan Lewis
 
-# Prompt {{{
-# Some quick color aliases for the prompt {{{
-GRAY="%{"$'\033[0;30m'"%}"
-BLACK="%{"$'\033[1;30m'"%}"
-RED="%{"$'\033[0;31m'"%}"
-HIRED="%{"$'\033[1;31m'"%}"
-GREEN="%{"$'\033[0;32m'"%}"
-HIGREEN="%{"$'\033[1;32m'"%}"
-YELLOW="%{"$'\033[0;33m'"%}"
-HIYELLOW="%{"$'\033[1;33m'"%}"
-BLUE="%{"$'\033[0;34m'"%}"
-HIBLUE="%{"$'\033[1;34m'"%}"
-MAGENTA="%{"$'\033[0;35m'"%}"
-HIMAGENTA="%{"$'\033[1;35m'"%}"
-CYAN="%{"$'\033[0;36m'"%}"
-HICYAN="%{"$'\033[1;36m'"%}"
-WHITE="%{"$'\033[0;37m'"%}"
-HIWHITE="%{"$'\033[1;37m'"%}"
-BOLD="%{"$'\033[0;39m'"%}"
-NORM="%{"$'\033[0m'"%}"
-# }}}
-# Set up the prompt {{{
-source ~/.zshprompt # Machine specific, for different colors
-# }}}
-# }}}
 # Environment variables {{{
 HISTFILE=~/.zshhistory            # What histfile are we using?
 HISTSIZE=100000                   # Big = better
@@ -66,13 +40,16 @@ setopt multios             # Allow multiple redirection!
 setopt nobeep              # Don't beep
 setopt no_flowcontrol      # No stupid flow control!
 setopt nullglob            # Delete a glob if it doesn't match anything
+setopt promptsubst
 setopt pushd_ignore_dups   # Don't push multiple copies of a directory
 # }}}
 # Autoloads {{{
 autoload -U compinit; compinit
-autoload -U predict-on;
-autoload edit-command-line
-autoload copy-earlier-word
+autoload -U predict-on
+autoload -U edit-command-line
+autoload -U copy-earlier-word
+autoload -U add-zsh-hook
+autoload -U zgitinit; zgitinit
 # }}}
 # Zle {{{
 zle -N predict-on;
@@ -166,6 +143,29 @@ alias -g L='|less'               # cat biglongfile L
 alias -g T='|tail'               # cat biglongfile T
 alias -g W='|wc'                 # cat biglongfile W
 # }}}
+# }}}
+# Prompt {{{
+# Some quick color aliases for the prompt {{{
+GRAY="%{"$'\033[0;30m'"%}"
+BLACK="%{"$'\033[1;30m'"%}"
+RED="%{"$'\033[0;31m'"%}"
+HIRED="%{"$'\033[1;31m'"%}"
+GREEN="%{"$'\033[0;32m'"%}"
+HIGREEN="%{"$'\033[1;32m'"%}"
+YELLOW="%{"$'\033[0;33m'"%}"
+HIYELLOW="%{"$'\033[1;33m'"%}"
+BLUE="%{"$'\033[0;34m'"%}"
+HIBLUE="%{"$'\033[1;34m'"%}"
+MAGENTA="%{"$'\033[0;35m'"%}"
+HIMAGENTA="%{"$'\033[1;35m'"%}"
+CYAN="%{"$'\033[0;36m'"%}"
+HICYAN="%{"$'\033[1;36m'"%}"
+WHITE="%{"$'\033[0;37m'"%}"
+HIWHITE="%{"$'\033[1;37m'"%}"
+BOLD="%{"$'\033[0;39m'"%}"
+NORM="%{"$'\033[0m'"%}"
+# }}}
+source ~/.zshprompt
 # }}}
 
 # Print to stdout {{{
