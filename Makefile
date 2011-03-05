@@ -54,7 +54,7 @@ vim/bundle/%/.git:
 	git submodule update --init --recursive $(patsubst %/.git,%,$@)
 
 zsh/func/%/.git:
-	git submodule update --init --recursive $(patsubst %/.git/%,$@)
+	git submodule update --init --recursive $(patsubst %/.git,%,$@)
 
 build: bundles
 
