@@ -25,13 +25,13 @@ function git_path {
         if [ -z "$cdup" ]; then cdup="."; fi
         cd $cdup
         name=$(pwd)
-        cd $wd
 
         if zgit_isworktreeclean; then
             color=$GREEN
         else
             color=$RED
         fi
+        cd $wd
         echo ${${${$(print -P %d)/${name}/${name:h}/${color}${name:t}${CYAN}}/${HOME}/\~/}/\/\//\/}
     else
         echo $(print -P %~)
