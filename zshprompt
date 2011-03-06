@@ -32,7 +32,7 @@ function git_path {
         else
             color=$RED
         fi
-        echo ${${${$(print -P %d)/${name}/${name:h}${color}${name:t}${CYAN}}/${HOME}/\~/}/\/\//\/}
+        echo ${${${$(print -P %d)/${name}/${name:h}/${color}${name:t}${CYAN}}/${HOME}/\~/}/\/\//\/}
     else
         echo $(print -P %~)
     fi
