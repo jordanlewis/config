@@ -1,5 +1,7 @@
 DEST = $(HOME)
 
+# Dotfiles, as they appear in the repo. Each one will be linked to the
+# filename you get by prefixing "~/.".
 CONFIGS = \
 Xdefaults \
 Xmodmap \
@@ -14,7 +16,9 @@ zshenv \
 zshprompt \
 zshrc
 
-VIMBUNDLEFILES = \
+# The names of the pathogen bundles we want to install. These are kept as
+# submodules in vim/bundle/, and are updated when we install.
+PATHOGENBUNDLENAMES = \
 Color-Sample-Pack \
 EnhCommentify.vim \
 histwin.vim \
@@ -28,17 +32,18 @@ vim-unimpaired \
 
 ZSHBUNDLEFILES = zsh-git
 
-DIRNAMES = vimundo
-
 TARGETS = $(patsubst %,$(DEST)/.%,$(CONFIGS))
-DIRS    = $(patsubst %,$(DEST)/.%,$(DIRNAMES))
 
-VIMBUNDLES = $(patsubst %,vim/bundle/%/.git,$(VIMBUNDLEFILES))
+# Add bin/hub etc
+TARGETS += $(DEST)/bin/hub
+
+PATHOGENBUNDLES= $(patsubst %,vim/bundle/%/.git,$(PATHOGENBUNDLENAMES))
 ZSHBUNDLES = $(patsubst %,zsh/func/%/.git,$(ZSHBUNDLEFILES))
 
 all: build
 
 install: build dirs $(TARGETS)
+	mkdir -p ~/.vimundo
 
 $(DEST)/.% : %
 	@mkdir -p $(dir $@)
@@ -48,7 +53,13 @@ $(DEST)/.% : %
 $(DEST)/.%/:
 	mkdir -p $@
 
-dirs: $(DIRS)
+$(DEST)/% : %
+	@mkdir -p $(dir $@)
+	@[ ! -e $@ ] || [ -h $@ ] || mv -f $@ $@.bak
+	ln -sf $(PWD)/$* $@
+
+bin/hub: bin
+	curl http://chriswanstrath.com/hub/standalone -sLo bin/hub && chmod +x bin/hub
 
 vim/bundle/%/.git:
 	git submodule update --init --recursive $(patsubst %/.git,%,$@)
@@ -56,9 +67,9 @@ vim/bundle/%/.git:
 zsh/func/%/.git:
 	git submodule update --init --recursive $(patsubst %/.git,%,$@)
 
-build: bundles
+build: bundles bin/hub
 
-bundles: $(VIMBUNDLES) $(ZSHBUNDLES)
+bundles: $(PATHOGENBUNDLES) $(ZSHBUNDLES)
 
 clean:
 	@echo Cleaning from $(DEST)
