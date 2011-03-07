@@ -42,8 +42,7 @@ ZSHBUNDLES = $(patsubst %,zsh/func/%/.git,$(ZSHBUNDLEFILES))
 
 all: build
 
-install: build dirs $(TARGETS)
-	mkdir -p ~/.vimundo
+install: build $(TARGETS) ~/.vimundo
 
 $(DEST)/.% : %
 	@mkdir -p $(dir $@)
@@ -58,7 +57,8 @@ $(DEST)/% : %
 	@[ ! -e $@ ] || [ -h $@ ] || mv -f $@ $@.bak
 	ln -sf $(PWD)/$* $@
 
-bin/hub: bin
+bin/hub:
+	mkdir -p bin
 	curl http://chriswanstrath.com/hub/standalone -sLo bin/hub && chmod +x bin/hub
 
 vim/bundle/%/.git:
