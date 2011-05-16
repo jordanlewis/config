@@ -24,7 +24,7 @@ set background=light  " Dark term bg (but bg=dark is gross)
 set display=lastline  " Display as much of the last line as possible, not @
 set hlsearch          " Hilight /search results!
 set incsearch         " do incremental searching
-set lazyredraw        " don't redraw screen during macros and stuff
+"set lazyredraw        " don't redraw screen during macros and stuff
 set list              " Display listchars (see below)
 set listchars=tab:>=,trail:_ " display tabs as >==== and trailing spaces as _
 set matchtime=1       " 1/10 of a second for showmatch
