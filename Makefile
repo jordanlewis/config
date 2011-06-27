@@ -59,7 +59,7 @@ $(DEST)/% : %
 
 bin/hub:
 	mkdir -p bin
-	curl http://chriswanstrath.com/hub/standalone -sLo bin/hub && chmod +x bin/hub
+	curl http://defunkt.io/hub/standalone -sLo bin/hub && chmod +x bin/hub
 
 vim/bundle/%/.git:
 	git submodule update --init --recursive $(patsubst %/.git,%,$@)
