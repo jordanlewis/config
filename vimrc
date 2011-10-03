@@ -111,6 +111,14 @@ map <F12> :set number!<CR>
 nnoremap <C-N> :bn<Enter>
 nnoremap <C-P> :bp<Enter>
 
+" Make ctrl-j and ctrl-k cycle through split windows in cmd mode
+nnoremap <C-J> :wincmd w<Enter>
+nnoremap <C-K> :wincmd W<Enter>
+
+" Make ctrl-h and ctrl-l cycle through tab pages in cmd mode
+nnoremap <C-H> :tabp<Enter>
+nnoremap <C-L> :tabn<Enter>
+
 " :w!! sudo-saves the current buffer
 cmap w!! w !sudo tee % >/dev/null
 
