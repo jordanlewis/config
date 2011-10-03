@@ -6,6 +6,7 @@ maptimeout 50        # Finally get rid of the damn escape timeout!!!
 nethack on           # Use funny nethack messages
 nonblock on          # Good things
 startup_message off  # No annoying copyright message.
+defscrollback 5000
 #deflogin on          # Emulates a login shell so I get my path
 # }}}
 # 256 Color xterm {{{
