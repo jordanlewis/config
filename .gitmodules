@@ -31,3 +31,6 @@
 [submodule "zsh/func/zsh-git"]
 	path = zsh/func/zsh-git
 	url = git://github.com/jordanlewis/zsh-git.git
+[submodule "vim/bundle/vim-colors-solarized"]
+	path = vim/bundle/vim-colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized.git
