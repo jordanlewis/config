@@ -24,6 +24,7 @@ EnhCommentify.vim \
 histwin.vim \
 matchit \
 OmniCppComplete \
+vim-colors-solarized \
 vim-endwise \
 vim-fugitive \
 vim-git \
