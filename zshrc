@@ -50,8 +50,9 @@ autoload -U predict-on
 autoload -U edit-command-line
 autoload -U copy-earlier-word
 autoload -U add-zsh-hook
-autoload -U zgitinit; zgitinit
-autoload -U prompt_wunjo_setup; prompt_wunjo_setup
+#autoload -U gitinfo; gitinfo
+#autoload -U zgitinit; zgitinit
+#autoload -U prompt_wunjo_setup; prompt_wunjo_setup
 # }}}
 # Zle {{{
 zle -N predict-on;

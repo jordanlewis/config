@@ -1,133 +1,182 @@
-function git_info {
-    return;
-    zgit_isgit || return
+typeset -gA gitinfo
 
-    #if ! zgit_isindexclean; then
-    #    echo -n "${GREEN}+"
-    #fi
+local -A c
+c[br]=%F{cyan}      # branch name color
+c[halt]=%F{magenta} # abnormal status color
+c[sha]=%F{yellow}   # sha color
+c[plus]=%F{green}   # revisions ahead color
+c[minus]=%F{red}    # revisions behind color
+c[equal]=%F{blue}
+c[none]=%f%k%b
 
-    echo -n "${RED}"
-    #if ! zgit_isworktreeclean; then
-    #    echo -n '!'
-    #fi
-    #if zgit_hasunmerged; then
-    #    echo -n '*'
-    #fi
-    #if zgit_hasuntracked; then
-    #    echo -n '?'
-    #fi
+
+gitinfo_update() {
+	gitinfo=()
+	gitinfo[dir]="$(git rev-parse --git-dir 2>/dev/null)"
+	if [[ $? -ne 0 ]] || [[ -z "$gitinfo[dir]" ]]; then
+		gitinfo[msg]=""
+		gitinfo[dir]=""
+		return
+	fi
+	if [[ $gitinfo[dir] == ".git" ]]; then
+		gitinfo[root]=$(pwd)
+	else
+		gitinfo[root]=${gitinfo[dir]:h}
+	fi
+	gitinfo[bare]=$(git rev-parse --is-bare-repository)
+	local branch_ref=$(git symbolic-ref HEAD 2>/dev/null)
+	gitinfo[branch]=${branch_ref##*/}
+	gitinfo[headname]=$c[br]$gitinfo[branch]
+	if [[ -z $gitinfo[branch] ]]; then
+		gitinfo[headname]="$c[br]$(git name-rev --name-only HEAD)"
+	fi
+	gitinfo[headsha]=$(git rev-parse HEAD)
+
+	if [[ -n "$(git ls-files $gitinfo[dir]:h --modified)" ]]; then
+		gitinfo[dirty]="true"
+	fi
+	if git diff --quiet --cached 2>/dev/null; then; else
+		gitinfo[staged]="true"
+	fi
+	if [[ -n $(git ls-files -u) ]]; then
+		gitinfo[unmerged]="true"
+	fi
+	if [[ -n $(git ls-files --others --exclude-standard) ]]; then
+		gitinfo[untracked]="true"
+	fi
+
+	if [[ -n $gitinfo[branch] ]]; then
+		local remote=$(git config branch.$gitinfo[branch].remote)
+		if [[ -n $remote ]]; then
+			local merge=$(git config branch.$gitinfo[branch].merge)
+			if [[ $remote != "." ]]; then
+				merge=$remote/$(basename $merge)
+			else
+				merge=${merge##*/}
+			fi
+			local -a behind ahead
+			behind=($(git rev-list $gitinfo[branch]..$merge | wc -l))
+			ahead=($(git rev-list $merge..$gitinfo[branch] | wc -l))
+			# reset to master~1: master..origin/master has 1
+			# add commit to master: origin/master..master has 1
+			# add commit to master~1: both have 1
+			local tracking_msg=""
+			if [[ $ahead -eq 0 ]] && [[ $behind -eq 0 ]]; then
+				tracking_msg+="$c[equal]->"
+			else
+				if [[ $ahead -gt 0 ]]; then
+					tracking_msg+="$c[plus]+$ahead"
+				fi
+				if [[ $behind -gt 0 ]]; then
+					tracking_msg+="$c[minus]-$behind"
+				fi
+			fi
+			gitinfo[tracking_merge]="$c[br]$merge"
+			gitinfo[tracking_msg]=$tracking_msg
+		fi
+	fi
+	#gitinfo[headtag]git
+	local g=$gitinfo[dir]
+	if [ -f "$g/rebase-merge/interactive" ]; then
+		gitinfo[op]="rb -i"
+		gitinfo[rb_head]=$(git name-rev --name-only $(cat "$g/rebase-merge/orig-head"))
+		gitinfo[rb_onto]=$(git name-rev --name-only $(cat "$g/rebase-merge/onto"))
+		gitinfo[op_msg]="$gitinfo[rb_onto]..$gitinfo[rb_head]"
+	elif [ -d "$g/rebase-merge" ]; then
+		gitinfo[op]="rb -m"
+		gitinfo[rb_head]=$(cat "$g/rebase-merge/head-name")
+		gitinfo[op_msg]="on $gitinfo[rb_head]"
+	else
+		if [ -d "$g/rebase-apply" ]; then
+			if [ -f "$g/rebase-apply/rebasing" ]; then
+				gitinfo[op]="rb"
+			elif [ -f "$g/rebase-apply/applying" ]; then
+				gitinfo[op]="am"
+			else
+				gitinfo[op]="am/rb"
+			fi
+			gitinfo[op_msg]="on $gitinfo[headname]"
+		elif [ -f "$g/MERGE_HEAD" ]; then
+			gitinfo[op]="mrg"
+			gitinfo[merge_head]=$(cat "$g/MERGE_HEAD")
+			gitinfo[op_msg]="$(git name-rev --name-only $gitinfo[merge_head]) into $gitinfo[headname]"
+		elif [ -f "$g/CHERRY_PICK_HEAD" ]; then
+			gitinfo[op]="chrypck"
+			gitinfo[cp_head]=$(cat "$g/CHERRY_PICK_HEAD")
+			gitinfo[op_msg]="from $(git name-rev --name-only $gitinfo[cp_head]) onto $gitinfo[headname]"
+		elif [ -f "$g/BISECT_LOG" ]; then
+			gitinfo[op]="bs"
+			gitinfo[bs_start]=$(cat "$g/BISECT_START")
+			gitinfo[op_msg]="from $gitinfo[bs_start] on $gitinfo[headname]"
+		else
+			gitinfo[op]="on"
+			gitinfo[op_msg]="$gitinfo[headname]"
+			if [[ -n "$gitinfo[tracking_msg]" ]]; then
+				gitinfo[op_msg]+=" $gitinfo[tracking_msg] $gitinfo[tracking_merge]"
+			fi
+		fi
+	fi
+	if [[ $gitinfo[op] == "on" ]]; then
+		gitinfo[op]="$c[none]$gitinfo[op]"
+	else
+		gitinfo[op]="$c[halt]$gitinfo[op]"
+	fi
+	gitinfo[msg]=" $gitinfo[op] $gitinfo[op_msg]"
 }
 
-function git_path {
-    if zgit_isgit; then
-        wd=$(pwd)
-        cdup=$(git rev-parse --show-cdup)
-        if [ -z "$cdup" ]; then cdup="."; fi
-        cd $cdup
-        name=$(pwd)
+gitinfo_update
 
-        if zgit_isworktreeclean; then
-            if zgit_isindexclean; then
-                color=$GREEN
+git_status() {
+	if [[ -z $gitinfo[dir] ]]; then
+		return
+	else
+		echo -n " $gitinfo[op] $gitinfo[op_msg]"
+	fi
+}
+
+is_git() {
+	if [[ -z $gitinfo[dir] ]]; then
+		return 1
+	else
+		return 0
+	fi
+}
+
+git_path() {
+    if is_git; then
+        if [[ -z $gitinfo[dirty] ]]; then
+            if [[ -z $gitinfo[staged] ]]; then
+                color=%F{green}
             else
-                color=$YELLOW
+                color=%F{yellow}
             fi
         else
-            color=$RED
+            color=%F{red}
         fi
-        cd $wd
-        echo ${${${$(print -P %d)/${name}/${name:h}/${color}${name:t}${CYAN}}/${HOME}/\~/}/\/\//\/} $(scm_status)
+        local root=$gitinfo[root]
+        echo ${${${$(print -P %d)/${root}/${root:h}/${color}${root:t}%F{cyan}}/${HOME}/\~/}/\/\//\/}
     else
         echo $(print -P %~)
     fi
 }
 
-pluralize() {
-    if (( $1 > 1 )); then
-        echo 's';
-    fi
-}
-scm_status() {
-	zgit_isgit || return
-	local -A pc
-	pc=(${(kv)wunjo_prompt_colors})
-
-	head=$(zgit_head)
-	gitcommit=$(revstring $head)
-
-	local -a commits
-
-	if zgit_rebaseinfo; then
-		orig_commit=$(revstring $zgit_info[rb_head])
-		orig_name=$(git name-rev --name-only $zgit_info[rb_head])
-		orig="$pc[scm_branch]$orig_name$pc[punc]($pc[scm_commitid]$orig_commit$pc[punc])"
-		onto_commit=$(revstring $zgit_info[rb_onto])
-		onto_name=$(git name-rev --name-only $zgit_info[rb_onto])
-		onto="$pc[scm_branch]$onto_name$pc[punc]($pc[scm_commitid]$onto_commit$pc[punc])"
-
-		if [[ -n "$zgit_info[rb_upstream]" ]] && [[ $zgit_info[rb_upstream] != $zgit_info[rb_onto] ]]; then
-			upstream_commit=$(revstring $zgit_info[rb_upstream])
-			upstream_name=$(git name-rev --name-only $zgit_info[rb_upstream])
-			upstream="$pc[scm_branch]$upstream_name$pc[punc]($pc[scm_commitid]$upstream_commit$pc[punc])"
-			commits+="rebasing $upstream$pc[reset]..$orig$pc[reset] onto $onto$pc[reset]"
-		else
-			commits+="rebasing $onto$pc[reset]..$orig$pc[reset]"
-		fi
-
-		local -a revs
-		revs=($(git rev-list $zgit_info[rb_onto]..HEAD))
-		if [[ $#revs -gt 0 ]]; then
-			commits+="\n$#revs commit$(pluralize $#revs) in"
-		fi
-
-		if [[ -f $zgit_info[dotest]/message ]]; then
-			mess=$(head -n1 $zgit_info[dotest]/message)
-			commits+="on $mess"
-		fi
-	elif [ -n "$gitcommit" ]; then
-		commits+="on $pc[scm_branch]$head$pc[punc]($pc[scm_commitid]$gitcommit$pc[punc])$pc[reset]"
-		local track_merge=$(zgit_tracking_merge)
-		if [[ -n "$track_merge" ]]; then
-			if git rev-parse --verify -q $track_merge >/dev/null; then
-				local track_remote=$(zgit_tracking_remote)
-				local tracked=$(revstring $track_merge 2>/dev/null)
-
-				local -a revs
-				revs=($(git rev-list --reverse $track_merge..HEAD))
-				if (( $#revs > 0 )); then
-					local base=$(revstring $revs[1]~1)
-					local base_name=$(git name-rev --name-only $base)
-					local base_short=$(revstring $base)
-
-					local conj="since"
-					if [[ "$base" == "$tracked" ]]; then
-						conj+=" tracked"
-						tracked=
-					fi
-					commits+="$#revs commit$(pluralize $#revs) $conj $pc[scm_branch]$base_name$pc[punc]($pc[scm_commitid]$base_short$pc[punc])$pc[reset]"
-				fi
-
-				if [[ -n "$tracked" ]]; then
-					local track_name=$track_merge
-					if [[ $track_remote == "." ]]; then
-						track_name=${track_name##*/}
-					fi
-					tracked=$(revstring $tracked)
-					commits+="tracking $pc[scm_branch]$track_name$pc[punc]"
-					if [[ "$tracked" != "$gitcommit" ]]; then
-						commits[$#commits]+="($pc[scm_commitid]$tracked$pc[punc])"
-					fi
-					commits[$#commits]+="$pc[reset]"
-				fi
-			fi
-		fi
-	fi
-
-	if [ $#commits -gt 0 ]; then
-		echo -n " ${(j: :)commits}"
+gitinfo_preexec() {
+	if [[ $2 == git\ * ]] || [[ $2 == *\ git\ * ]]; then
+		gitinfo[do_update]=1
 	fi
 }
 
+gitinfo_precmd() {
+	if [[ "$gitinfo[do_update]" -eq 1 ]]; then
+		gitinfo[do_update]=0
+		gitinfo_update
+	fi
+}
 
-PS1='${YELLOW}[%T${CYAN}%1(j.%%${GREEN}%j${CYAN}.)%0(?..:${HIRED}%?)${YELLOW}]${CYAN}$(git_info)${CYAN}%# ${NORM}'
-RPS1='${CYAN}%n@%m:$(git_path)${NORM}'
+add-zsh-hook chpwd gitinfo_update
+add-zsh-hook preexec gitinfo_preexec
+add-zsh-hook precmd gitinfo_precmd
+
+PS1='%F{yellow}[%T%F{cyan}%1(j.%%%F{green}%j%F{cyan}.)%0(?..:%F{red}%B%?%b)%F{yellow}]%F{cyan}%# %f'
+RPS1='%100>..>%F{cyan}%n%f%B@%b%F{cyan}%m%f%B:%b%<<%F{cyan}$(git_path)$gitinfo[msg]%b%k%f'
+
