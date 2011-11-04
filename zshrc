@@ -28,7 +28,8 @@ setopt badpattern          # Print an error message on badly formed glob
 #setopt cdablevars          # So we can cd to metachars like ~
 setopt correctall          # Attempt typo corrections
 setopt complete_in_word    # 
-setopt extended_glob       # Allow ~ # ^ metachars in globbing
+#setopt extended_glob       # Allow ~ # ^ metachars in globbing
+# disabled - this makes it so you can't use the ^ revision spec thing with git!
 setopt extended_history    # More information in history
 setopt hist_ignore_space   # Don't put space-prepended commands in the history
 setopt interactivecomments # Allow comments even in the interactive shell
@@ -91,6 +92,7 @@ alias cp='nocorrect cp'        # Don't correct this cmd
 alias mkdir='nocorrect mkdir'  # Don't correct this cmd
 alias mv='nocorrect mv'        # Don't correct this cmd
 alias touch='nocorrect touch'  # Don't correct this cmd
+alias git='nocorrect git'
 alias sl='sl -l'               # ... dumb
 alias termcast='telnet 213.184.131.118 37331'   # noway.ratry.ru 37331
 alias slurp='wget -r --no-parent'
