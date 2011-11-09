@@ -22,9 +22,6 @@
 [submodule "vim/bundle/OmniCppComplete"]
 	path = vim/bundle/OmniCppComplete
 	url = git://github.com/vim-scripts/OmniCppComplete.git
-[submodule "vim/bundle/vim-git"]
-	path = vim/bundle/vim-git
-	url = git://github.com/tpope/vim-git.git
 [submodule "vim/bundle/Color-Sample-Pack"]
 	path = vim/bundle/Color-Sample-Pack
 	url = git://github.com/vim-scripts/Color-Sampler-Pack.git
