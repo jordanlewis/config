@@ -16,7 +16,7 @@ set nostartofline      " Don't move to start of line on buffer next
 set shell=/bin/bash    " zsh screws up
 set ttimeoutlen=50     " 50 milliseconds for esc timeout instead of 1000
 set ttyfast            " We are always going to be using a fast terminal.
-call pathogen#runtime_append_all_bundles()
+call pathogen#infect()
 filetype plugin indent on " File type detection on, (cindent for .c etc)
 " }}}
 " Appearance {{{
