@@ -20,18 +20,16 @@ zshrc
 # submodules in vim/bundle/, and are updated when we install.
 PATHOGENBUNDLENAMES = \
 Color-Sample-Pack \
-EnhCommentify.vim \
 histwin.vim \
 matchit \
 OmniCppComplete \
 vim-colors-solarized \
 vim-endwise \
 vim-fugitive \
-vim-git \
 vim-surround \
 vim-unimpaired \
 
-ZSHBUNDLEFILES = zsh-git
+ZSHBUNDLEFILES =
 
 TARGETS = $(patsubst %,$(DEST)/.%,$(CONFIGS))
 
