@@ -237,7 +237,6 @@ highlight PmenuSbar  ctermbg=cyan
 highlight PmenuThumb ctermfg=red
 highlight Folded     ctermbg=black ctermfg=darkgreen
 highlight Search     None          ctermfg=lightred
-highlight Comment    ctermfg=darkgray
 
 let python_hilight_all=1
 
