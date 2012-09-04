@@ -26,7 +26,7 @@ setopt auto_cd             # If I type a directory, assume I mean to cd to it
 setopt auto_pushd          # Automatically push directories onto the stack
 setopt badpattern          # Print an error message on badly formed glob
 #setopt cdablevars          # So we can cd to metachars like ~
-setopt correctall          # Attempt typo corrections
+setopt correct             # Attempt typo corrections
 setopt complete_in_word    # 
 #setopt extended_glob       # Allow ~ # ^ metachars in globbing
 # disabled - this makes it so you can't use the ^ revision spec thing with git!
