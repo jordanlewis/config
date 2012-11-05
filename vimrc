@@ -107,6 +107,8 @@ imap <F11> <Esc>:call <SID>spell()<CR>
 " F12 -> toggle :set number
 map <F12> :set number!<CR>
 
+nmap gu :silent GundoToggle<CR>
+
 " Make ctrl-n and ctrl-p cycle through buffers in cmd mode
 nnoremap <C-N> :bn<Enter>
 nnoremap <C-P> :bp<Enter>
