@@ -43,3 +43,6 @@
 [submodule "vim/bundle/paredit.vim"]
 	path = vim/bundle/paredit.vim
 	url = https://github.com/vim-scripts/paredit.vim
+[submodule "vim/bundle/clam.vim"]
+	path = vim/bundle/clam.vim
+	url = https://github.com/sjl/clam.vim.git
