@@ -18,16 +18,7 @@ zshrc
 
 # The names of the pathogen bundles we want to install. These are kept as
 # submodules in vim/bundle/, and are updated when we install.
-PATHOGENBUNDLENAMES = \
-Color-Sample-Pack \
-histwin.vim \
-matchit \
-OmniCppComplete \
-vim-colors-solarized \
-vim-endwise \
-vim-fugitive \
-vim-surround \
-vim-unimpaired \
+PATHOGENBUNDLENAMES = $(shell git submodule status | cut -d' ' -f3 | grep vim | cut -d'/' -f3)
 
 ZSHBUNDLEFILES =
 
