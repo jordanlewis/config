@@ -109,6 +109,13 @@ map <F12> :set number!<CR>
 
 nmap gu :silent GundoToggle<CR>
 
+nnoremap ! :Clam<space>
+vnoremap ! :ClamVisual<space>
+let g:clam_autoreturn = 1
+
+nmap <leader>c <Plug>CommentaryLine
+xmap <leader>c <Plug>Commentary
+
 " Make ctrl-n and ctrl-p cycle through buffers in cmd mode
 nnoremap <C-N> :bn<Enter>
 nnoremap <C-P> :bp<Enter>
