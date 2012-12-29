@@ -126,6 +126,8 @@ cmap w!! w !sudo tee % >/dev/null
 
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 
+nmap `/ :nohl<CR>
+
 " }}}
 " Autocommands {{{
 " Jump to last known cursor position on file edit {{{
