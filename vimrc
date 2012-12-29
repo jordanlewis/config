@@ -116,6 +116,8 @@ let g:clam_autoreturn = 1
 nmap <leader>c <Plug>CommentaryLine
 xmap <leader>c <Plug>Commentary
 
+let g:ctrlp_map = '<C-F>'
+
 " Make ctrl-n and ctrl-p cycle through buffers in cmd mode
 nnoremap <C-N> :bn<Enter>
 nnoremap <C-P> :bp<Enter>
