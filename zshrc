@@ -8,8 +8,8 @@ export SHELL=`which zsh`                 # New shells don't open bash
 export EDITOR=vim                        # Use vim!
 export GREP_OPTIONS='--color=auto'       # Color my greps
 export GOROOT=$HOME/go
-export GOOS=linux
-export GOARCH=386
+export GOOS=darwin
+export GOARCH=amd64
 if [ $(uname) = Linux ]; then 
     alias ls='ls --color=auto'
 else
@@ -17,7 +17,10 @@ else
 fi
 export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PERL5LIB='/Users/jlewis/.perl/'
-export PATH=~/bin:$PATH
+export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
+export PLY_HOME=~/ext/ply/dist/ply
+export PATH=~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
+
 typeset -U PATH
 
 # }}}
