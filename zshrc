@@ -93,11 +93,27 @@ alias cp='nocorrect cp'        # Don't correct this cmd
 alias mkdir='nocorrect mkdir'  # Don't correct this cmd
 alias mv='nocorrect mv'        # Don't correct this cmd
 alias touch='nocorrect touch'  # Don't correct this cmd
-alias git='nocorrect git'
 alias sl='sl -l'               # ... dumb
 alias termcast='telnet 213.184.131.118 37331'   # noway.ratry.ru 37331
 alias slurp='wget -r --no-parent'
 alias deflac='for file in *.flac; do $(flac -cd "$file" | lame -V 0 --vbr-new - "${file%.flac}.mp3"); done'   # convert all flacs in directory to v0
+# add git-number support if it exists
+which git-number &> /dev/null
+if [ $? -eq 0 ]; then
+    numbercommands=(add diff reset checkout)
+    git()
+    {
+        if [ $1 = "status" ]; then
+            /usr/local/bin/git number;
+        elif [ ${numbercommands[(r)$1]} ]; then
+            /usr/local/bin/git number "$@"
+        else
+            /usr/local/bin/git "$@"
+        fi
+    }
+else
+    alias git='nocorrect git'
+fi
 # }}}
 # Shells {{{
 alias bh='ssh root@bughouse.econnectix.com'
