@@ -149,7 +149,6 @@ alias -g T='|tail'               # cat biglongfile T
 alias -g W='|wc'                 # cat biglongfile W
 # }}}
 # }}}
-# }}}
 # Prompt {{{
 source ~/.zshprompt
 # }}}
