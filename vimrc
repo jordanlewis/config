@@ -124,9 +124,9 @@ nnoremap <C-P> :bp<Enter>
 nnoremap <C-J> :wincmd w<Enter>
 nnoremap <C-K> :wincmd W<Enter>
 
-" Make ctrl-h and ctrl-l cycle through tab pages in cmd mode
-nnoremap <C-H> :tabp<Enter>
-nnoremap <C-L> :tabn<Enter>
+" Make ctrl-h and ctrl-l cycle through yank ring
+let g:yankring_replace_n_pkey = '<C-H>'
+let g:yankring_replace_n_nkey = '<C-L>'
 
 " :w!! sudo-saves the current buffer
 cmap w!! w !sudo tee % >/dev/null
