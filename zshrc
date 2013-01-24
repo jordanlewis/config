@@ -1,6 +1,7 @@
 # .zshrc by Jordan Lewis
 
 # Environment variables {{{
+for f in `find ~/.bash.d/ -type f`; do source $f; done
 HISTFILE=~/.zshhistory            # What histfile are we using?
 HISTSIZE=100000                   # Big = better
 SAVEHIST=7000                     # When to save to the file?
@@ -22,6 +23,20 @@ export JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Home
 export PLY_HOME=~/ext/ply/dist/ply
 export PATH=~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
 
+source ~/.aws/kcs-aws.conf
+export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.5.5.0/jars"
+export EC2_PRIVATE_KEY="/Users/jordan/.aws/pk-IFJE2TQ7VDYZHJW4ER46OO7VGSSHVGDP.pem"
+export EC2_CERT="/Users/jordan/.aws/cert-IFJE2TQ7VDYZHJW4ER46OO7VGSSHVGDP.pem"
+export EC2_REGION=us-east-1
+export AWS_CREDENTIAL_FILE="/Users/jordan/.aws/credential-file"
+export AWS_CLOUDFORMATION_HOME="/usr/local/Cellar/aws-cfn-tools/1.0.9/jars/"
+
+
+export CLUSTER=Your Cluster Name Goes Here  # This will get changed based on the cluster you're working on.
+
+export C_INCLUDE_PATH=/usr/local/Cellar/zookeeper/3.4.3/include/zookeeper/
+
+source ~/.rvm/scripts/rvm
 typeset -U PATH
 
 # }}}

@@ -2,7 +2,7 @@
     editor = vim
     excludesfile = ~/.gitignore
 [user]
-    email = jordanthelewis@gmail.com
+    email = jordan@knewton.com
     name = Jordan Lewis
 [github]
     user = jordanlewis
