@@ -25,7 +25,7 @@ set display=lastline  " Display as much of the last line as possible, not @
 set hlsearch          " Hilight /search results!
 set incsearch         " do incremental searching
 set list              " Display listchars (see below)
-set listchars=tab:>=,trail:_ " display tabs as >==== and trailing spaces as _
+set listchars=tab:  ,trail:_ " display tabs as nbsps and trailing spaces as _
 set matchtime=1       " 1/10 of a second for showmatch
 set nomore            " No spacing through messages!
 set nonumber          " Don't display line numbers on the side
@@ -244,12 +244,12 @@ au BufRead,BufNewFile *.go set noexpandtab
 " Colors {{{
 "autocmd BufWinEnter * syn match EOLWS excludenl /[ \t]\+$/
 "highlight EOLWS      ctermbg=red
-highlight Pmenu      ctermfg=grey ctermbg=darkblue
-highlight PmenuSel   ctermfg=red  ctermbg=darkblue
-highlight PmenuSbar  ctermbg=cyan
-highlight PmenuThumb ctermfg=red
-highlight Folded     ctermbg=black ctermfg=darkgreen
-highlight Search     None          ctermfg=lightred
+"highlight Pmenu      ctermfg=grey ctermbg=darkblue
+"highlight PmenuSel   ctermfg=red  ctermbg=darkblue
+"highlight PmenuSbar  ctermbg=cyan
+"highlight PmenuThumb ctermfg=red
+"highlight Folded     ctermbg=black ctermfg=darkgreen
+"highlight Search     None          ctermfg=lightred
 
 let g:vimclojure#HighlightBuiltins = 1
 let g:vimclojure#HighlightContrib = 1
@@ -258,6 +258,11 @@ let g:vimclojure#FuzzyIndent = 1
 let g:vimclojure#ParenRainbow = 1
 let g:vimclojure#WantNailgun = 1
 let g:vimclojure#NailgunClient = "/usr/local/bin/ng"
+let g:solarized_visibility="normal"
+let g:solarized_underline=0
+"let g:solarized_termcolors=256
+set bg=dark
+colorscheme solarized
 
 let python_hilight_all=1
 

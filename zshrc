@@ -4,6 +4,7 @@
 HISTFILE=~/.zshhistory            # What histfile are we using?
 HISTSIZE=100000                   # Big = better
 SAVEHIST=7000                     # When to save to the file?
+TERM=xterm-256color
 export SHELL=`which zsh`                 # New shells don't open bash
 export EDITOR=vim                        # Use vim!
 export GREP_OPTIONS='--color=auto'       # Color my greps
