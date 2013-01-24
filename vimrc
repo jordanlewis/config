@@ -335,33 +335,6 @@ nmap <silent> ds :call <SID>diffstart('read # <bar> normal ggdd')<CR>
 nmap <silent> dc :call <SID>diffstart('call append(0, split(s:vcs_orig(expand("#")), "\n", 1)) <bar> normal Gdddd')<CR>
 nmap <silent> de :call <SID>diffstop()<CR>
 " }}}
-" Nopaste {{{
-function s:nopaste(visual)
-    let nopaste_services = $NOPASTE_SERVICES
-    if &filetype == 'tex'
-        let $NOPASTE_SERVICES = "Mathbin ".$NOPASTE_SERVICES
-    endif
-
-    if a:visual
-        silent exe "normal gv!nopaste\<CR>"
-    else
-        let pos = getpos('.')
-        silent exe "normal gg!Gnopaste\<CR>"
-    endif
-    silent normal "+yy
-    let @* = @+
-    silent undo
-    if a:visual
-        normal gv
-    else
-        call setpos('.', pos)
-    endif
-    let $NOPASTE_SERVICES = nopaste_services
-    echo @+
-endfunction
-nmap <silent> \p :call <SID>nopaste(0)<CR>
-vmap <silent> \p :<C-U>call <SID>nopaste(1)<CR>
-" }}}
 " SuperTab {{{
 let g:SuperTabMidWordCompletion = 0
 let g:SuperTabDefaultCompletionType = 'context'
