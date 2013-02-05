@@ -52,3 +52,6 @@
 [submodule "vim/bundle/YankRing.vim"]
 	path = vim/bundle/YankRing.vim
 	url = https://github.com/vim-scripts/YankRing.vim.git
+[submodule "vim/bundle/syntastic"]
+	path = vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
