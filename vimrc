@@ -80,6 +80,11 @@ set tildeop           " Turn ~ into an operator
 let g:EnhCommentifyBindInInsert = 'No' " No enhancedcommentify in insert mode
 let g:EnhCommentifyRespectIndent = 'Yes' " indent where I want you to indent
 set switchbuf=useopen " Jump to open window containing jump target if available
+let g:syntastic_error_symbol='✗'    " Prettier gutter symbols for Syntastic.
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_mode_map = { 'mode': 'passive',
+                            \ 'active_filetypes': [],
+                            \ 'passive_filetypes': [] }
 "}}}
 " Persistent undo {{{
 if exists("+undofile")
