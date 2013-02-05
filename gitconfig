@@ -30,6 +30,7 @@
     rpull = pull --rebase
 [merge]
     conflictstyle = diff3
+    defaultToUpstream = true
 [rerere]
     enabled = 1
 [push]
