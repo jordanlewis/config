@@ -30,7 +30,6 @@ gitinfo_update() {
 	if [[ -z $gitinfo[branch] ]]; then
 		gitinfo[headname]="$c[br]$(git name-rev --name-only HEAD)"
 	fi
-	gitinfo[headsha]=$(git rev-parse HEAD)
 
 	if [[ -n "$(git ls-files $gitinfo[dir]:h --modified)" ]]; then
 		gitinfo[dirty]="true"
