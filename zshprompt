@@ -1,4 +1,4 @@
-typeset -gA gitinfo
+declare -A gitinfo
 
 local -A c
 c[br]=%F{cyan}      # branch name color
@@ -12,7 +12,13 @@ c[none]=%f%k%b
 
 gitinfo_update() {
 	gitinfo=()
-	gitinfo[dir]="$(git rev-parse --git-dir 2>/dev/null)"
+	tmp=$(pwd | egrep '\/\.git')
+	if [[ $? -eq 0 ]]; then
+		# We're inside a .git folder which is going to cause 
+		# problems for rev-parse
+		return
+	fi
+	gitinfo[dir]=$(git rev-parse --git-dir 2>/dev/null)
 	if [[ $? -ne 0 ]] || [[ -z "$gitinfo[dir]" ]]; then
 		gitinfo[msg]=""
 		gitinfo[dir]=""
@@ -30,7 +36,6 @@ gitinfo_update() {
 	if [[ -z $gitinfo[branch] ]]; then
 		gitinfo[headname]="$c[br]$(git name-rev --name-only HEAD)"
 	fi
-	gitinfo[headsha]=$(git rev-parse HEAD)
 
 	if [[ -n "$(git ls-files $gitinfo[dir]:h --modified)" ]]; then
 		gitinfo[dirty]="true"
