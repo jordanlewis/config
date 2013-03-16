@@ -155,6 +155,14 @@ alias tdA="todo -A"              # displays all todo items
 alias usage='du -hs *'           # nicely displays disk usage of items in pwd
 which htop>/dev/null && alias top='htop' # prettier version of top if it exists
 # }}} 
+# Git {{{
+alias g='git'
+alias gs='git status'
+alias gd='git diff'
+alias gf='git fetch'
+alias ga='git add'
+alias gl='git log'
+# }}}
 # Global shortcuts {{{
 alias -g ...='../..'             # Ease of going backward
 alias -g ....='../../..'         # Yes
