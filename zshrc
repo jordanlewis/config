@@ -102,7 +102,7 @@ alias deflac='for file in *.flac; do $(flac -cd "$file" | lame -V 0 --vbr-new - 
 # add git-number support if it exists
 which git-number &> /dev/null
 if [ $? -eq 0 ]; then
-    numbercommands=(add diff reset checkout)
+    numbercommands=(add rm diff reset checkout co)
     git()
     {
         if [ $1 = "status" ]; then
