@@ -29,6 +29,7 @@ export EC2_PRIVATE_KEY="/Users/jordan/.aws/pk-IFJE2TQ7VDYZHJW4ER46OO7VGSSHVGDP.p
 export EC2_CERT="/Users/jordan/.aws/cert-IFJE2TQ7VDYZHJW4ER46OO7VGSSHVGDP.pem"
 export EC2_REGION=us-east-1
 export AWS_CREDENTIAL_FILE="/Users/jordan/.aws/credential-file"
+export AWS_RDS_HOME="/usr/local/Cellar/rds-command-line-tools/1.12.002/libexec/"
 export AWS_CLOUDFORMATION_HOME="/usr/local/Cellar/aws-cfn-tools/1.0.9/jars/"
 
 
@@ -70,6 +71,9 @@ autoload -U predict-on
 autoload -U edit-command-line
 autoload -U copy-earlier-word
 autoload -U add-zsh-hook
+autoload -U bashcompinit && bashcompinit
+complete -o default -C 'python -m knewton_crab_stacker.tab_completion "${COMP_LINE}"' kcs
+source /usr/local/lib/python2.7/site-packages/Kerrit-0.1.1-py2.7.egg/kerrit/kerrit-completion.bash
 # }}}
 # Zle {{{
 zle -N predict-on;
