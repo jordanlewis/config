@@ -1,6 +1,7 @@
 [core]
     editor = vim
     excludesfile = ~/.gitignore
+    pager = less -+F
 [user]
     email = jordan@knewton.com
     name = Jordan Lewis
@@ -35,4 +36,9 @@
 [rerere]
     enabled = 1
 [push]
-	default = simple
+    default = simple
+[rebase]
+    autosquash = true
+    stat = true
+[help]
+    autocorrect = 1

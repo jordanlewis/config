@@ -40,6 +40,8 @@ export C_INCLUDE_PATH=/usr/local/Cellar/zookeeper/3.4.3/include/zookeeper/
 source ~/.rvm/scripts/rvm
 typeset -U PATH
 
+export PYTHONSTARTUP="/Users/jordan/.pythonstartup"
+
 # }}}
 # Setopts {{{
 setopt auto_cd             # If I type a directory, assume I mean to cd to it
@@ -119,7 +121,7 @@ alias deflac='for file in *.flac; do $(flac -cd "$file" | lame -V 0 --vbr-new - 
 # add git-number support if it exists
 which git-number &> /dev/null
 if [ $? -eq 0 ]; then
-    numbercommands=(add diff reset checkout)
+    numbercommands=(add rm diff reset checkout co)
     git()
     {
         if [ $1 = "status" ]; then
