@@ -7,6 +7,7 @@ Xdefaults \
 Xmodmap \
 config/awesome/rc.lua \
 gitconfig \
+pythonstartup \
 screenrc \
 vim \
 vimrc \

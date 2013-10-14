@@ -24,6 +24,8 @@ export PATH=~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:
 
 typeset -U PATH
 
+export PYTHONSTARTUP="/Users/jordan/.pythonstartup"
+
 # }}}
 # Setopts {{{
 setopt auto_cd             # If I type a directory, assume I mean to cd to it
