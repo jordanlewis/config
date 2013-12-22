@@ -2,6 +2,7 @@
     editor = vim
     excludesfile = ~/.gitignore
     pager = less -+F
+    preloadindex = true
 [user]
     email = jordanthelewis@gmail.com
     name = Jordan Lewis
@@ -13,6 +14,7 @@
     ci = commit
     co = checkout
     st = status
+    ls = list
 
     lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
 
@@ -30,6 +32,8 @@
     unstage = reset HEAD --
     review = push origin HEAD:refs/for/master
     rpull = pull --rebase
+
+    edit = "!sh -c \"exec vim $(git list $@ | tr '\n' ' ')\""
 [merge]
     conflictstyle = diff3
     defaultToUpstream = true
