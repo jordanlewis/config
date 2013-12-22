@@ -135,6 +135,7 @@ if [ $? -eq 0 ]; then
 else
     alias git='nocorrect git'
 fi
+alias quickinstall='mvn clean -DskipTests install -Dmaven.test.skip=true -Dfindbugs.skip=true -Dinstrument.skip=true'
 # }}}
 # Shells {{{
 alias bh='ssh root@bughouse.econnectix.com'
