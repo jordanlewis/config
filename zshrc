@@ -143,7 +143,9 @@ alias '..'='cd ..'               # cd .. takes too much effort!
 alias 'web'='python -m SimpleHTTPServer' # hosts . on :8000
 alias bc='bc -q -l'              # no warranty thing; loads math lib
 alias broadcast='ifconfig | grep broadcast | tail -c 16'
+alias c='pygmentize -O style=monokai -f console256 -g'
 alias cls='perl -e "print \"\e[2J\""' # prints a clearscreen - for termcast
+alias dotperl='rsync -av lib/* ~/.perl/'
 alias duf='du -sk * | sort -n | perl -ne '\''($s,$f)=split(m{\t});for (qw(K M G)) {if($s<1024) {printf("%.1f",$s);print "$_\t$f"; last};$s=$s/1024}'\'
 alias hide='xset dpms force standby; exit' # kills my LCD monitor
 alias l='ls'                     # sometimes I think I'm still on a MUD/MOO
@@ -180,7 +182,8 @@ alias -g W='|wc'                 # cat biglongfile W
 source ~/.zshprompt
 # }}}
 
+. `brew --prefix`/etc/profile.d/z.sh
+
 # Print to stdout {{{
 fortune 2>/dev/null || return 0 # essential!
 # }}}
-alias dotperl='rsync -av lib/* ~/.perl/'
