@@ -75,7 +75,7 @@ autoload -U copy-earlier-word
 autoload -U add-zsh-hook
 autoload -U bashcompinit && bashcompinit
 complete -o default -C 'python -m knewton_crab_stacker.tab_completion "${COMP_LINE}"' kcs
-source /usr/local/lib/python2.7/site-packages/Kerrit-0.1.1-py2.7.egg/kerrit/kerrit-completion.bash
+source ~/repo/tools/Kerrit/kerrit/kerrit-completion.bash
 # }}}
 # Zle {{{
 zle -N predict-on;
