@@ -203,6 +203,8 @@ alias -g W='|wc'                 # cat biglongfile W
 source ~/.zshprompt
 # }}}
 
+source ~/.zsh/bundle/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 . `brew --prefix`/etc/profile.d/z.sh
 
 # Print to stdout {{{
