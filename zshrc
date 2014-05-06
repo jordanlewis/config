@@ -85,6 +85,7 @@ bindkey "^Z" accept-and-hold     # Enter and push line
 bindkey " " magic-space          # Expands from hist (!vim )
 bindkey "^\\" pound-insert       # As an alternative to ctrl-c; will go in hist
 bindkey "\e[3~" delete-char      # Enable delete
+bindkey "^x^e" edit-command-line
 #bindkey "^Q" predict-off        # Disable sweet complete-as-you-type
 #bindkey "..." predict-on         # Enable sweet complete-as-you-type
 
