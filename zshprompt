@@ -24,11 +24,7 @@ gitinfo_update() {
 		gitinfo[dir]=""
 		return
 	fi
-	if [[ $gitinfo[dir] == ".git" ]]; then
-		gitinfo[root]=$(pwd)
-	else
-		gitinfo[root]=${gitinfo[dir]:h}
-	fi
+	gitinfo[root]=$(git rev-parse --show-toplevel)
 	gitinfo[bare]=$(git rev-parse --is-bare-repository)
 	local branch_ref=$(git symbolic-ref HEAD 2>/dev/null)
 	gitinfo[branch]=${branch_ref##*/}
@@ -37,7 +33,7 @@ gitinfo_update() {
 		gitinfo[headname]="$c[br]$(git name-rev --name-only HEAD)"
 	fi
 
-	if [[ -n "$(git ls-files $gitinfo[dir]:h --modified)" ]]; then
+	if [[ -n "$(git ls-files $gitinfo[root] --modified)" ]]; then
 		gitinfo[dirty]="true"
 	fi
 	if git diff --quiet --cached 2>/dev/null; then; else
