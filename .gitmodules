@@ -58,3 +58,15 @@
 [submodule "zsh/bundle/zsh-syntax-highlighting"]
 	path = zsh/bundle/zsh-syntax-highlighting
 	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
+[submodule "vim/bundle/vim-fireplace"]
+	path = vim/bundle/vim-fireplace
+	url = git://github.com/tpope/vim-fireplace.git
+[submodule "vim/bundle/vim-dispatch"]
+	path = vim/bundle/vim-dispatch
+	url = git://github.com/tpope/vim-dispatch.git
+[submodule "vim/bundle/vim-projectionist"]
+	path = vim/bundle/vim-projectionist
+	url = git://github.com/tpope/vim-projectionist.git
+[submodule "vim/bundle/vim-leiningen"]
+	path = vim/bundle/vim-leiningen
+	url = git://github.com/tpope/vim-leiningen.git

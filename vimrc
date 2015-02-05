@@ -236,6 +236,9 @@ autocmd FileType {vim,help} setlocal keywordprg=:help
 " Java {{{
 au Filetype java setlocal omnifunc=javacomplete#Complete
 " }}}
+" OCaml {{{
+autocmd FileType ocaml source /Users/jordan/.opam/system/share/vim/syntax/ocp-indent.vim
+" }}}
 " Use levdes syntax for .des files {{{
 au BufRead,BufNewFile *.des set syntax=levdes
 au BufRead,BufNewFile *.frag,*.vert,*.fp,*.vp,*.glsl set syntax=glsl
