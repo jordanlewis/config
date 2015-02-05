@@ -24,43 +24,6 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home
 export PLY_HOME=~/ext/ply/dist/ply
 export PATH=~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
 
-<<<<<<< Updated upstream
-||||||| merged common ancestors
-source ~/.aws/kcs-aws.conf
-export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.5.5.0/jars"
-export EC2_PRIVATE_KEY="/Users/jordan/.aws/pk-IFJE2TQ7VDYZHJW4ER46OO7VGSSHVGDP.pem"
-export EC2_CERT="/Users/jordan/.aws/cert-IFJE2TQ7VDYZHJW4ER46OO7VGSSHVGDP.pem"
-export EC2_REGION=us-east-1
-export AWS_CREDENTIAL_FILE="/Users/jordan/.aws/credential-file"
-export AWS_RDS_HOME="/usr/local/Cellar/rds-command-line-tools/1.12.002/libexec/"
-export AWS_CLOUDFORMATION_HOME="/usr/local/Cellar/aws-cfn-tools/1.0.9/jars/"
-
-
-export CLUSTER=Your Cluster Name Goes Here  # This will get changed based on the cluster you're working on.
-
-export C_INCLUDE_PATH=/usr/local/Cellar/zookeeper/3.4.3/include/zookeeper/
-
-source ~/.rvm/scripts/rvm
-=======
-source ~/.aws/kcs-aws.conf
-export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.5.5.0/jars"
-export EC2_PRIVATE_KEY="/Users/jordan/.aws/pk-IFJE2TQ7VDYZHJW4ER46OO7VGSSHVGDP.pem"
-export EC2_CERT="/Users/jordan/.aws/cert-IFJE2TQ7VDYZHJW4ER46OO7VGSSHVGDP.pem"
-export EC2_REGION=us-east-1
-export AWS_CREDENTIAL_FILE="/Users/jordan/.aws/credential-file"
-export AWS_RDS_HOME="/usr/local/Cellar/rds-command-line-tools/1.12.002/libexec/"
-export AWS_CLOUDFORMATION_HOME="/usr/local/Cellar/aws-cfn-tools/1.0.9/jars/"
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=/Users/jordan/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
-
-
-export CLUSTER=Your Cluster Name Goes Here  # This will get changed based on the cluster you're working on.
-
-export C_INCLUDE_PATH=/usr/local/Cellar/zookeeper/3.4.3/include/zookeeper/
-
-source ~/.rvm/scripts/rvm
->>>>>>> Stashed changes
 typeset -U PATH
 
 export PYTHONSTARTUP="/Users/jordan/.pythonstartup"
