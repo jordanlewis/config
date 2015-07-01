@@ -100,7 +100,6 @@ bindkey "^N" accept-and-infer-next-history # Enter; pop next history event
 bindkey "^O" push-line           # Pushes line to buffer stack
 bindkey "^P" get-line            # Pops top of buffer stack
 bindkey "^R" history-incremental-search-backward # Like in bash, but should !
-bindkey "^T" transpose-chars     # Transposes adjacent chars
 bindkey "^Y" copy-earlier-word
 bindkey "^Z" accept-and-hold     # Enter and push line
 bindkey " " magic-space          # Expands from hist (!vim )
@@ -210,8 +209,9 @@ source ~/.zsh/bundle/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 . `brew --prefix`/etc/profile.d/z.sh
 
 # Print to stdout {{{
-fortune 2>/dev/null || return 0 # essential!
+fortune 2>/dev/null || true # essential!
 # }}}
 
 # OPAM configuration
 . /Users/jordan/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

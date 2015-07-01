@@ -43,9 +43,6 @@
 [submodule "vim/bundle/clam.vim"]
 	path = vim/bundle/clam.vim
 	url = https://github.com/sjl/clam.vim.git
-[submodule "vim/bundle/ctrlp.vim"]
-	path = vim/bundle/ctrlp.vim
-	url = https://github.com/kien/ctrlp.vim.git
 [submodule "vim/bundle/YankRing.vim"]
 	path = vim/bundle/YankRing.vim
 	url = https://github.com/vim-scripts/YankRing.vim.git
@@ -67,3 +64,15 @@
 [submodule "vim/bundle/vim-leiningen"]
 	path = vim/bundle/vim-leiningen
 	url = git://github.com/tpope/vim-leiningen.git
+[submodule "vim/bundle/vim-startify"]
+	path = vim/bundle/vim-startify
+	url = https://github.com/mhinz/vim-startify
+[submodule "vim/bundle/vim-repeat"]
+	path = vim/bundle/vim-repeat
+	url = git://github.com/tpope/vim-repeat.git
+[submodule "vim/bundle/vim-sneak"]
+	path = vim/bundle/vim-sneak
+	url = git://github.com/justinmk/vim-sneak.git
+[submodule "vim/bundle/fzf"]
+	path = vim/bundle/fzf
+	url = git://github.com/junegunn/fzf.git
