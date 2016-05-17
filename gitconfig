@@ -46,3 +46,9 @@
     stat = true
 [help]
     autocorrect = 1
+[diff]
+    tool = delta
+[difftool]
+    prompt = false
+[difftool "delta"]
+    cmd = delta "$LOCAL" "$REMOTE" "$MERGED"
