@@ -9,9 +9,7 @@ TERM=xterm-256color
 export SHELL=`which zsh`                 # New shells don't open bash
 export EDITOR=vim                        # Use vim!
 export GREP_OPTIONS='--color=auto'       # Color my greps
-export GOROOT=$HOME/go
-export GOOS=darwin
-export GOARCH=amd64
+export GOPATH=$HOME/repo
 if [ $(uname) = Linux ]; then 
     alias ls='ls --color=auto'
 else
@@ -21,9 +19,8 @@ export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PERL5LIB='/Users/jlewis/.perl/'
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/
 export PLY_HOME=~/ext/ply/dist/ply
-export PATH=~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$PATH
+export PATH=~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:${GOPATH//://bin:}/bin:$PATH
 
-source ~/.aws/kcs-aws.conf
 export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.5.5.0/jars"
 export EC2_PRIVATE_KEY="/Users/jordan/.aws/pk-IFJE2TQ7VDYZHJW4ER46OO7VGSSHVGDP.pem"
 export EC2_CERT="/Users/jordan/.aws/cert-IFJE2TQ7VDYZHJW4ER46OO7VGSSHVGDP.pem"
@@ -72,8 +69,6 @@ autoload -U edit-command-line
 autoload -U copy-earlier-word
 autoload -U add-zsh-hook
 autoload -U bashcompinit && bashcompinit
-complete -o default -C 'python -m knewton_crab_stacker.tab_completion "${COMP_LINE}"' kcs
-source ~/repo/tools/Kerrit/kerrit/kerrit-completion.bash
 # }}}
 # Zle {{{
 zle -N predict-on;
@@ -200,7 +195,7 @@ alias -g W='|wc'                 # cat biglongfile W
 source ~/.zshprompt
 # }}}
 
-source ~/.zsh/bundle/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 . `brew --prefix`/etc/profile.d/z.sh
 
