@@ -40,9 +40,6 @@
 [submodule "vim/bundle/clam.vim"]
 	path = vim/bundle/clam.vim
 	url = https://github.com/sjl/clam.vim.git
-[submodule "vim/bundle/YankRing.vim"]
-	path = vim/bundle/YankRing.vim
-	url = https://github.com/vim-scripts/YankRing.vim.git
 [submodule "vim/bundle/syntastic"]
 	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
@@ -82,3 +79,9 @@
 [submodule "vim/bundle/vim-go"]
 	path = vim/bundle/vim-go
 	url = git@github.com:fatih/vim-go.git
+[submodule "vim/bundle/fzf"]
+	path = vim/bundle/fzf
+	url = git@github.com:junegunn/fzf.git
+[submodule "vim/bundle/fzf.vim"]
+	path = vim/bundle/fzf.vim
+	url = git@github.com:junegunn/fzf.vim.git
