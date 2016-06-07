@@ -16,9 +16,6 @@
 [submodule "vim/bundle/matchit"]
 	path = vim/bundle/matchit
 	url = git://github.com/vim-scripts/matchit.zip.git
-[submodule "vim/bundle/OmniCppComplete"]
-	path = vim/bundle/OmniCppComplete
-	url = git://github.com/vim-scripts/OmniCppComplete.git
 [submodule "vim/bundle/Color-Sample-Pack"]
 	path = vim/bundle/Color-Sample-Pack
 	url = git://github.com/vim-scripts/Color-Sampler-Pack.git
@@ -76,3 +73,15 @@
 [submodule "vim/bundle/fzf"]
 	path = vim/bundle/fzf
 	url = git://github.com/junegunn/fzf.git
+[submodule "vim/bundle/vim-buftabline"]
+	path = vim/bundle/vim-buftabline
+	url = git@github.com:ap/vim-buftabline.git
+[submodule "vim/bundle/neocomplete.vim"]
+	path = vim/bundle/neocomplete.vim
+	url = git@github.com:Shougo/neocomplete.vim.git
+[submodule "vim/bundle/tagbar"]
+	path = vim/bundle/tagbar
+	url = git://github.com/majutsushi/tagbar
+[submodule "vim/bundle/vim-go"]
+	path = vim/bundle/vim-go
+	url = git@github.com:fatih/vim-go.git

@@ -87,8 +87,13 @@ let g:syntastic_mode_map = { 'mode': 'passive',
                             \ 'passive_filetypes': [] }
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
 let g:go_highlight_structs = 1
+let g:go_highlight_interfaces = 1
+let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_auto_type_info = 1
+let g:go_fmt_command = "goimports"
 autocmd FileType go set number fo+=croq tw=100
 autocmd Filetype go set makeprg=go\ build\ .
 let g:tagbar_type_go = {
@@ -118,6 +123,10 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
     \ }
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+
+
 "}}}
 " Persistent undo {{{
 if exists("+undofile")
@@ -172,6 +181,18 @@ cmap w!! w !sudo tee % >/dev/null
 vmap <C-c> y:call system("pbcopy", getreg("\""))<CR>
 
 nmap `/ :nohl<CR>
+
+nmap <silent> <Leader>e :NERDTreeToggle<CR>
+
+nmap <F8> :TagbarToggle<CR>
+
+
+au FileType go nmap <Leader>i <Plug>(go-info)
+au FileType go nmap <Leader>gd <Plug>(go-doc)
+au FileType go nmap <Leader>r <Plug>(go-run)
+au FileType go nmap <Leader>b <Plug>(go-build)
+au FileType go nmap <Leader>t <Plug>(go-test)
+au FileType go nmap gd <Plug>(go-def-tab)
 
 " }}}
 " Autocommands {{{
