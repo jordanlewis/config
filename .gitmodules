@@ -70,9 +70,6 @@
 [submodule "vim/bundle/vim-sneak"]
 	path = vim/bundle/vim-sneak
 	url = git://github.com/justinmk/vim-sneak.git
-[submodule "vim/bundle/fzf"]
-	path = vim/bundle/fzf
-	url = git://github.com/junegunn/fzf.git
 [submodule "vim/bundle/vim-buftabline"]
 	path = vim/bundle/vim-buftabline
 	url = git@github.com:ap/vim-buftabline.git
