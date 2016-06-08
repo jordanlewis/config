@@ -4,7 +4,7 @@
     pager = less -+F
     preloadindex = true
 [user]
-    email = jordan@knewton.com
+    email = jordan@cockroachlabs.com
     name = Jordan Lewis
 [github]
     user = jordanlewis

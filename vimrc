@@ -77,8 +77,6 @@ set tags+='./../tags,../tags,./../.tags,../.tags' " look in the level above
 "set commentstring="%s 
 set dict=/usr/share/dict/words
 set tildeop           " Turn ~ into an operator
-let g:EnhCommentifyBindInInsert = 'No' " No enhancedcommentify in insert mode
-let g:EnhCommentifyRespectIndent = 'Yes' " indent where I want you to indent
 set switchbuf=useopen " Jump to open window containing jump target if available
 let g:syntastic_error_symbol='✗'    " Prettier gutter symbols for Syntastic.
 let g:syntastic_warning_symbol='⚠'
@@ -92,10 +90,13 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-let g:go_auto_type_info = 1
+" This is kind of slow, let's turn it off for now
+" let g:go_auto_type_info = 1
 let g:go_fmt_command = "goimports"
 autocmd FileType go set number fo+=croq tw=100
 autocmd Filetype go set makeprg=go\ build\ .
+autocmd Filetype go let g:neocomplete#enable_at_startup = 1
+autocmd Filetype golet g:neocomplete#enable_smart_case = 1
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
@@ -123,8 +124,6 @@ let g:tagbar_type_go = {
     \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
     \ }
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
 
 
 "}}}
@@ -168,12 +167,12 @@ nnoremap <C-N> :bn<Enter>
 nnoremap <C-P> :bp<Enter>
 
 " Make ctrl-j and ctrl-k cycle through split windows in cmd mode
-nnoremap <C-J> :wincmd w<Enter>
-nnoremap <C-K> :wincmd W<Enter>
-
-" Make ctrl-h and ctrl-l cycle through yank ring
-let g:yankring_replace_n_pkey = '<C-H>'
-let g:yankring_replace_n_nkey = '<C-L>'
+"nnoremap <C-J> :wincmd w<Enter>
+"nnoremap <C-K> :wincmd W<Enter>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
 
 " :w!! sudo-saves the current buffer
 cmap w!! w !sudo tee % >/dev/null
@@ -186,10 +185,15 @@ nmap <silent> <Leader>e :NERDTreeToggle<CR>
 
 nmap <F8> :TagbarToggle<CR>
 
+nmap <C-F> :Files<CR>
+nmap <C-_> :Ag<CR> " vim sees _ as / - this is binding for C-/
 
 au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>r <Plug>(go-run)
+au FileType go nmap <F6> <Plug>(go-rename)
+au FileType go nmap <F7> <Plug>(go-callers)
+au FileType go nmap <S-Down> <Plug>(go-implements)
 au FileType go nmap <Leader>b <Plug>(go-build)
 au FileType go nmap <Leader>t <Plug>(go-test)
 au FileType go nmap gd <Plug>(go-def-tab)
@@ -242,8 +246,7 @@ else
     autocmd FileType tex setlocal makeprg=(cd\ %:h\ &&\ pdflatex\ %:t)
 endif
 " see :help errorformat-LaTeX
-autocmd FileType tex setlocal errorformat=
-    \%E!\ LaTeX\ %trror:\ %m,
+autocmd FileType tex setlocal errorformat=\%E!\ LaTeX\ %trror:\ %m,
     \%E!\ %m,
     \%+WLaTeX\ %.%#Warning:\ %.%#line\ %l%.%#,
     \%+W%.%#\ at\ lines\ %l--%*\\d,
@@ -263,13 +266,13 @@ autocmd FileType tex setlocal errorformat=
     \%-G(see\ the\ transcript%.%#),
     \%-G\\s%#,
     \%+O(%f)%r,
-    \%+P(%f%r,
+    \%+P(%f%r, ") <-- add a comment to fix syntax highlighting
     \%+P\ %\\=(%f%r,
     \%+P%*[^()](%f%r,
     \%+P[%\\d%[^()]%#(%f%r,
     \%+Q)%r,
     \%+Q%*[^()])%r,
-    \%+Q[%\\d%*[^()])%r
+    \%+Q[%\\d%*[^()])%r\
 " }}}
 " Lua {{{
 " :make does a syntax check
@@ -296,9 +299,6 @@ autocmd FileType ocaml source /Users/jordan/.opam/4.01.0/share/vim/syntax/ocp-in
 " Use levdes syntax for .des files {{{
 au BufRead,BufNewFile *.des set syntax=levdes
 au BufRead,BufNewFile *.frag,*.vert,*.fp,*.vp,*.glsl set syntax=glsl
-" }}}
-" Don't expand tabs in Go files {{{
-au BufRead,BufNewFile *.go set noexpandtab
 " }}}
 
 " }}}
@@ -396,10 +396,6 @@ endfunction
 nmap <silent> ds :call <SID>diffstart('read # <bar> normal ggdd')<CR>
 nmap <silent> dc :call <SID>diffstart('call append(0, split(s:vcs_orig(expand("#")), "\n", 1)) <bar> normal Gdddd')<CR>
 nmap <silent> de :call <SID>diffstop()<CR>
-" }}}
-" SuperTab {{{
-let g:SuperTabMidWordCompletion = 0
-let g:SuperTabDefaultCompletionType = 'context'
 " }}}
 " }}}
 
