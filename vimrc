@@ -125,6 +125,9 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
     \ }
 
+let g:startify_session_dir = '~/.vim/sessions'
+let g:session_autoload = 'no'
+let g:session_autosave = 'yes'
 
 "}}}
 " Persistent undo {{{
@@ -192,7 +195,7 @@ au FileType go nmap <Leader>i <Plug>(go-info)
 au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>r <Plug>(go-run)
 au FileType go nmap <F6> <Plug>(go-rename)
-au FileType go nmap <F7> <Plug>(go-callers)
+au FileType go nmap <F7> <Plug>(go-referrers)
 au FileType go nmap <S-Down> <Plug>(go-implements)
 au FileType go nmap <Leader>b <Plug>(go-build)
 au FileType go nmap <Leader>t <Plug>(go-test)

@@ -85,3 +85,9 @@
 [submodule "vim/bundle/fzf.vim"]
 	path = vim/bundle/fzf.vim
 	url = git@github.com:junegunn/fzf.vim.git
+[submodule "vim/bundle/vim-session"]
+	path = vim/bundle/vim-session
+	url = git@github.com:xolox/vim-session.git
+[submodule "vim/bundle/vim-misc"]
+	path = vim/bundle/vim-misc
+	url = git@github.com:xolox/vim-misc.git
