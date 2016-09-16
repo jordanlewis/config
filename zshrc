@@ -28,6 +28,9 @@ export EC2_REGION=us-east-1
 export AWS_RDS_HOME="/usr/local/Cellar/rds-command-line-tools/1.12.002/libexec/"
 export AWS_CLOUDFORMATION_HOME="/usr/local/Cellar/aws-cfn-tools/1.0.9/jars/"
 
+export GOOGLE_PROJECT=cockroach-shared
+export GOOGLE_CREDENTIALS=$(cat ~/Downloads/cockroach-shared-20d25f94f59e.json)
+
 
 export CLUSTER=Your Cluster Name Goes Here  # This will get changed based on the cluster you're working on.
 
