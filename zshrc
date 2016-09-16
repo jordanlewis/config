@@ -17,7 +17,7 @@ else
 fi
 export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PERL5LIB='/Users/jlewis/.perl/'
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_51.jdk/Contents/Home/
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/
 export PLY_HOME=~/ext/ply/dist/ply
 export PATH=~/bin:~/go/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:${GOPATH//://bin:}/bin:$PATH
 
@@ -56,6 +56,7 @@ setopt magicequalsubst     # echo foo=~/bar -> foo/home/jlewis/bar
 # disabled - given a dirtree foo/bar/baz.txt, cp -R foo/* /tmp/ causes baz.txt
 # to be sent to /tmp/. no good!
 setopt multios             # Allow multiple redirection!
+setopt nobanghist          # Disable ! replacement
 setopt nobeep              # Don't beep
 setopt no_flowcontrol      # No stupid flow control!
 setopt nullglob            # Delete a glob if it doesn't match anything
@@ -112,17 +113,23 @@ alias termcast='telnet 213.184.131.118 37331'   # noway.ratry.ru 37331
 alias slurp='wget -r --no-parent'
 alias deflac='for file in *.flac; do $(flac -cd "$file" | lame -V 0 --vbr-new - "${file%.flac}.mp3"); done'   # convert all flacs in directory to v0
 # add git-number support if it exists
+which hub &> /dev/null
+if [ $? -eq 0 ]; then
+    gitbin=$(which hub)
+else
+    gitbin=$(which git)
+fi
 which git-number &> /dev/null
 if [ $? -eq 0 ]; then
     numbercommands=(add rm diff reset checkout co)
     git()
     {
         if [ $1 = "status" ]; then
-            /usr/local/bin/git number;
+            $gitbin number;
         elif [ ${numbercommands[(r)$1]} ]; then
-            /usr/local/bin/git number "$@"
+            $gitbin number "$@"
         else
-            /usr/local/bin/git "$@"
+            $gitbin "$@"
         fi
     }
 else
@@ -199,10 +206,15 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 . `brew --prefix`/etc/profile.d/z.sh
 
+if (( $+commands[tag] )); then
+    tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null }
+    alias ag=tag
+fi
+
 # Print to stdout {{{
 fortune 2>/dev/null || true # essential!
 # }}}
 
 # OPAM configuration
 . /Users/jordan/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

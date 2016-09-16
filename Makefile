@@ -48,10 +48,6 @@ $(DEST)/% : %
 	@[ ! -e $@ ] || [ -h $@ ] || mv -f $@ $@.bak
 	ln -sf $(PWD)/$* $@
 
-bin/hub:
-	mkdir -p bin
-	curl http://defunkt.io/hub/standalone -sLo bin/hub && chmod +x bin/hub
-
 zsh/antigen.zsh:
 	curl -L https://raw.githubusercontent.com/zsh-users/antigen/master/antigen.zsh > zsh/antigen.zsh
 

@@ -1,11 +1,12 @@
 [core]
     editor = vim
     excludesfile = ~/.gitignore
-    pager = less -+F
+    pager = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight | less
     preloadindex = true
 [user]
     email = jordanthelewis@gmail.com
     name = Jordan Lewis
+    signingkey = 3A08059A
 [github]
     user = jordanlewis
 [color]
@@ -34,6 +35,8 @@
     rpull = pull --rebase
 
     edit = "!sh -c \"exec vim $(git list $@ | tr '\n' ' ')\""
+
+    fpr = "!f() { git fetch ${2:-origin} refs/pull/$1/head:pr/$1; }; f"
 [merge]
     conflictstyle = diff3
     defaultToUpstream = true
@@ -43,12 +46,28 @@
     default = simple
 [rebase]
     autosquash = true
+    autostash = true
+    preserve = true
     stat = true
 [help]
     autocorrect = 1
 [diff]
     tool = delta
+    compactionHeuristic = true
 [difftool]
     prompt = false
 [difftool "delta"]
     cmd = delta "$LOCAL" "$REMOTE" "$MERGED"
+[pager]
+	log = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight | less
+	show = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight | less
+	diff = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight | less
+[interactive]
+	diffFilter = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight
+	singleKey = true
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+[commit]
+	gpgsign = true
