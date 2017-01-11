@@ -31,6 +31,7 @@ gitinfo_update() {
 	gitinfo[headname]=$c[br]$gitinfo[branch]
 	if [[ -z $gitinfo[branch] ]]; then
 		gitinfo[headname]="$c[br]$(git name-rev --name-only HEAD)"
+		gitinfo[detached]="true"
 	fi
 
 	if [[ -n "$(git ls-files $gitinfo[root] --modified)" ]]; then
@@ -50,10 +51,9 @@ gitinfo_update() {
 		local remote=$(git config branch.$gitinfo[branch].remote)
 		if [[ -n $remote ]]; then
 			local merge=$(git config branch.$gitinfo[branch].merge)
+			merge=${merge##refs/heads/}
 			if [[ $remote != "." ]]; then
-				merge=$remote/$(basename $merge)
-			else
-				merge=${merge##*/}
+				merge=$remote/$merge
 			fi
 			local -a behind ahead
 			behind=($(git rev-list $gitinfo[branch]..$merge | wc -l))
@@ -110,7 +110,11 @@ gitinfo_update() {
 			gitinfo[bs_start]=$(cat "$g/BISECT_START")
 			gitinfo[op_msg]="from $gitinfo[bs_start] on $gitinfo[headname]"
 		else
-			gitinfo[op]="on"
+			if [[ -n $gitinfo[detached] ]]; then
+				gitinfo[op]="dtch"
+			else
+				gitinfo[op]="on"
+			fi
 			gitinfo[op_msg]="$gitinfo[headname]"
 			if [[ -n "$gitinfo[tracking_msg]" ]]; then
 				gitinfo[op_msg]+=" $gitinfo[tracking_msg] $gitinfo[tracking_merge]"
