@@ -299,6 +299,11 @@ au Filetype java setlocal omnifunc=javacomplete#Complete
 " OCaml {{{
 autocmd FileType ocaml source /Users/jordan/.opam/4.01.0/share/vim/syntax/ocp-indent.vim
 " }}}
+" Rust {{{
+autocmd FileType rust setlocal sw=2
+autocmd FileType rust setlocal ts=2
+autocmd FileType rust setlocal sts=2
+" }}}
 " Use levdes syntax for .des files {{{
 au BufRead,BufNewFile *.des set syntax=levdes
 au BufRead,BufNewFile *.frag,*.vert,*.fp,*.vp,*.glsl set syntax=glsl
