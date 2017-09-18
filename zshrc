@@ -220,11 +220,6 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 . `brew --prefix`/etc/profile.d/z.sh
 
-if (( $+commands[tag] )); then
-    tag() { command tag "$@"; source ${TAG_ALIAS_FILE:-/tmp/tag_aliases} 2>/dev/null }
-    alias ag=tag
-fi
-
 # Print to stdout {{{
 fortune 2>/dev/null || true # essential!
 # }}}
@@ -235,7 +230,7 @@ fortune 2>/dev/null || true # essential!
 # FZF configuration
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export FZF_CTRL_T_OPTS="--bind=ctrl-d:preview-page-down,ctrl-u:preview-page-up --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
-export FZF_CTRL_R_OPTS="--height 1"
+export FZF_CTRL_R_OPTS="--height 5 --inline-info"
 zle     -N   fzf-file-widget
 bindkey '^F' fzf-file-widget
 fzf-history-widget-accept() {

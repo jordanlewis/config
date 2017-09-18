@@ -297,7 +297,7 @@ autocmd FileType {vim,help} setlocal keywordprg=:help
 au Filetype java setlocal omnifunc=javacomplete#Complete
 " }}}
 " OCaml {{{
-autocmd FileType ocaml source /Users/jordan/.opam/4.01.0/share/vim/syntax/ocp-indent.vim
+autocmd FileType ocaml source /Users/jordan/.opam/system/share/ocp-indent/vim/indent/ocaml.vim
 " }}}
 " Rust {{{
 autocmd FileType rust setlocal sw=2
