@@ -38,6 +38,7 @@
     fpr = "!f() { git fetch ${2:-origin} refs/pull/$1/head:pr/$1; }; f"
     fa = fetch --all --prune
 
+    b = for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
     branch-prune = "!git branch --merged | egrep -v \"(^\\*|master)\" | xargs git branch -d #"
 
     last = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
