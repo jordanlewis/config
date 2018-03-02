@@ -55,6 +55,7 @@ gitinfo_update() {
 			if [[ $remote != "." ]]; then
 				merge=$remote/$merge
 			fi
+			merge=$(git rev-parse --abbrev-ref --symbolic-full-name @{u})
 			local -a behind ahead
 			behind=($(git rev-list $gitinfo[branch]..$merge | wc -l))
 			ahead=($(git rev-list $merge..$gitinfo[branch] | wc -l))
