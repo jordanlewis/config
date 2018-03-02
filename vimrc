@@ -78,11 +78,12 @@ set tags+='./../tags,../tags,./../.tags,../.tags' " look in the level above
 set dict=/usr/share/dict/words
 set tildeop           " Turn ~ into an operator
 set switchbuf=useopen " Jump to open window containing jump target if available
-let g:syntastic_error_symbol='✗'    " Prettier gutter symbols for Syntastic.
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_mode_map = { 'mode': 'passive',
-                            \ 'active_filetypes': [],
-                            \ 'passive_filetypes': [] }
+
+let g:gitgutter_sign_added = '·'
+let g:gitgutter_sign_modified = '.'
+let g:gitgutter_sign_removed = '.'
+let g:gitgutter_sign_modified_removed = '.'
+
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_fields = 1
@@ -125,7 +126,6 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
     \ }
 
-let g:startify_session_dir = '~/.vim/sessions'
 let g:session_autoload = 'no'
 let g:session_autosave = 'yes'
 
