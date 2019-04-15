@@ -19,7 +19,7 @@ export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PERL5LIB='/Users/jlewis/.perl/'
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/
 export PLY_HOME=~/ext/ply/dist/ply
-export PATH=~/bin:~/go/bin:~/.cargo/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:${GOPATH//://bin:}/bin:$PATH
+export PATH=~/bin:/usr/local/go/bin:~/.cargo/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:${GOPATH//://bin:}/bin:$PATH
 
 export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.5.5.0/jars"
 export EC2_PRIVATE_KEY="/Users/jordan/.aws/pk-IFJE2TQ7VDYZHJW4ER46OO7VGSSHVGDP.pem"
@@ -86,7 +86,6 @@ zstyle ':completion:*:functions' ignored-patterns '_*' # no missing completions
 # Bindkeys {{{
 bindkey -v                       # Use vim bindings
 bindkey "^A" beginning-of-line   # Like in bash, for memory
-bindkey "^B" beginning-of-line   # This won't be screwed up by screen, but weird
 bindkey "^E" end-of-line         # Like in bash
 bindkey "^N" accept-and-infer-next-history # Enter; pop next history event
 bindkey "^O" push-line           # Pushes line to buffer stack
@@ -178,21 +177,6 @@ alias restartx='sleep 5; startx' # restarts X!
 alias tdA="todo -A"              # displays all todo items
 alias usage='du -hs *'           # nicely displays disk usage of items in pwd
 which htop>/dev/null && alias top='htop' # prettier version of top if it exists
-c() {
-  local cols sep
-  cols=$(( COLUMNS / 3 ))
-  sep='{{::}}'
-
-  # Copy History DB to circumvent the lock
-  # - See http://stackoverflow.com/questions/8936878 for the file path
-  cp -f ~/Library/Application\ Support/Google/Chrome/Default/History /tmp/h
-
-  sqlite3 -separator $sep /tmp/h \
-    "select substr(title, 1, $cols), url
-     from urls order by last_visit_time desc" |
-  awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\n", $1, $2}' |
-  fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs open
-}
 # }}} 
 # Git {{{
 alias g='git'
@@ -216,9 +200,14 @@ alias -g W='|wc'                 # cat biglongfile W
 source ~/.zshprompt
 # }}}
 
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-. `brew --prefix`/etc/profile.d/z.sh
+# zplug {{{
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "changyuheng/fz", defer:1
+zplug "rupa/z", use:z.sh
+zplug load
+# }}}
 
 # Print to stdout {{{
 fortune 2>/dev/null || true # essential!
@@ -229,14 +218,47 @@ fortune 2>/dev/null || true # essential!
 
 # FZF configuration
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# CTRL-R - Paste the selected command from history into the command line
+fzf-history-widget-accept() {
+  local selected num
+  setopt localoptions noglobsubst noposixbuiltins pipefail 2> /dev/null
+  selected=$(fc -l 1 |
+      FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS --print-query --tac -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort,left:print-query,right:print-query $FZF_CTRL_R_OPTS --query=${(q)LBUFFER} +m" $(__fzfcmd))
+  local ret=$?
+
+  lines=(${(f)selected})
+
+  function setbuffer() {
+    BUFFER=$lines[1]
+  }
+  zle -N setbuffer
+
+  local accept=1
+  if [[ $ret -eq 1 ]]; then
+    zle setbuffer
+    accept=0
+  elif [[ -n $selected ]]; then
+    local out=$lines[2]
+    num=(${(s. .)out})
+    num=${num[1]}
+    if [[ -n $num ]]; then
+      zle vi-fetch-history -n $num
+    else
+      zle setbuffer
+      accept=0
+    fi
+  fi
+  zle redisplay
+  typeset -f zle-line-init >/dev/null && zle zle-line-init
+  if [[ $accept -eq 1 ]]; then
+    zle accept-line
+  fi
+  return $ret
+}
 export FZF_CTRL_T_OPTS="--bind=ctrl-d:preview-page-down,ctrl-u:preview-page-up --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
 export FZF_CTRL_R_OPTS="--height 5 --inline-info"
 zle     -N   fzf-file-widget
 bindkey '^F' fzf-file-widget
-fzf-history-widget-accept() {
-  fzf-history-widget
-  zle accept-line
-}
 zle     -N     fzf-history-widget-accept
 bindkey '^R' fzf-history-widget-accept
 export FZF_DEFAULT_COMMAND='rg --files -g ""'
@@ -310,3 +332,6 @@ bind-git-helper() {
 }
 bind-git-helper f b t r h
 unset -f bind-git-helper
+
+
+export PATH="/usr/local/opt/ccache/libexec:$HOME/.yarn/bin:$PATH:$GOPATH/src/github.com/cockroachlabs/production/crl-prod:$GOPATH/src/github.com/cockroachdb/cockroach/bin"

@@ -8,7 +8,7 @@
     name = Jordan Lewis
     signingkey = 3A08059A
 [github]
-    user = jordanlewis
+	user = jordanlewis
 [color]
     ui = auto
 [alias]
@@ -26,7 +26,7 @@
     changes = diff --name-status -r
     diffstat = diff --stat -r
 
-    who = shortlog -s --
+    who = shortlog -s --no-merges --
     whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
     whatis = show -s --pretty='tformat:%h (%s, %ad)' --date=short
     unstage = reset HEAD --
@@ -36,7 +36,8 @@
     edit = "!sh -c \"exec vim $(git list $@ | tr '\n' ' ')\""
 
     fpr = "!f() { git fetch ${2:-origin} refs/pull/$1/head:pr/$1; }; f"
-    fa = fetch --all --prune
+    freview = "!f() { git fetch origin refs/reviewable/pr$1/r$2:review/pr$1/r$2; }; f"
+    fa = "!f() { git remote  | xargs -t -P 8 -n1 git fetch --prune; }; f"
 
     b = for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
     branch-prune = "!git branch --merged | egrep -v \"(^\\*|master)\" | xargs git branch -d #"
@@ -61,7 +62,8 @@
 [help]
     autocorrect = 1
 [diff]
-    tool = delta
+    colormoved = zebra
+    tool = vimdiff
     compactionHeuristic = true
 [difftool]
     prompt = false
@@ -75,9 +77,10 @@
 	diffFilter = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight
 	singleKey = true
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 [commit]
 	gpgsign = true
 [http]

@@ -91,8 +91,9 @@ let g:go_highlight_structs = 1
 let g:go_highlight_interfaces = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-" This is kind of slow, let's turn it off for now
+" These are kind of slow, let's turn them off for now
 " let g:go_auto_type_info = 1
+" let g:go_auto_sameids = 1
 let g:go_fmt_command = "goimports"
 autocmd FileType go set number fo+=croq tw=100
 autocmd Filetype go set makeprg=go\ build\ .
@@ -309,6 +310,7 @@ au BufRead,BufNewFile *.des set syntax=levdes
 au BufRead,BufNewFile *.frag,*.vert,*.fp,*.vp,*.glsl set syntax=glsl
 " }}}
 
+autocmd BufNewFile,BufRead */sql/logictest/testdata/* set filetype=crlogictest tw=0
 " }}}
 " }}}
 " Colors {{{
