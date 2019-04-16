@@ -6,7 +6,9 @@ CONFIGS = \
 Xdefaults \
 Xmodmap \
 config/awesome/rc.lua \
+config/karabiner \
 gitconfig \
+fzf.zsh \
 pythonstartup \
 screenrc \
 vim \
