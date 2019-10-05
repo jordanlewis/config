@@ -28,9 +28,6 @@ ZSHBUNDLEFILES =
 
 TARGETS = $(patsubst %,$(DEST)/.%,$(CONFIGS))
 
-# Add bin/hub etc
-TARGETS += $(DEST)/bin/hub
-
 PATHOGENBUNDLES= $(patsubst %,vim/bundle/%/.git,$(PATHOGENBUNDLENAMES))
 ZSHBUNDLES = $(patsubst %,zsh/func/%/.git,$(ZSHBUNDLEFILES))
 
@@ -60,7 +57,7 @@ vim/bundle/%/.git:
 zsh/func/%/.git:
 	git submodule update --init --recursive $(patsubst %/.git,%,$@)
 
-build: bundles bin/hub
+build: bundles
 
 bundles: $(PATHOGENBUNDLES) $(ZSHBUNDLES)
 
