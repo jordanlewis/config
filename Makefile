@@ -11,6 +11,7 @@ gitconfig \
 fzf.zsh \
 pythonstartup \
 screenrc \
+spacemacs \
 vim \
 vimrc \
 zprofile \
