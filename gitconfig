@@ -42,7 +42,7 @@
     b = for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
     branch-prune = "!git branch --merged | egrep -v \"(^\\*|master)\" | xargs git branch -d #"
 
-    last = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
+    last = for-each-ref --sort=-committerdate --count=20 --format='%(align:30,left)%(refname:short)%(end)%(committerdate:relative)' refs/heads/
 
 [merge]
     conflictstyle = diff3
@@ -82,6 +82,6 @@
 	required = true
 	process = git-lfs filter-process
 [commit]
-	gpgsign = true
+    #gpgsign = true
 [http]
 	cookiefile = /Users/jordan/.gitcookies
