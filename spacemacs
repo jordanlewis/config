@@ -129,7 +129,10 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(sanityinc-solarized-light
+   dotspacemacs-themes '(
+                         solarized-light
+                         solarized-dark
+                         sanityinc-solarized-light
                          sanityinc-solarized-dark
                          spacemacs-light
                          spacemacs-dark
@@ -326,13 +329,22 @@ you should place your code here."
   ;; Disable macOS listening to cmd-H and other things.
   (setq mac-pass-command-to-system nil)
 
+  ;; Automatically follow symlinks to version-controlled files. This is useful
+  ;; to prevent prompting every time we open ~/.spacemacs, which is generally
+  ;; a symlink to ~/personal/config/.spacemacs.
+  (setq vc-follow-symlinks t)
+
+  ;; Turn on projectile caching - projectile is slow otherwise.
+  (setq projectile-enable-caching t)
+
   ;; Keybindings. These are buffer and window navigation bindings.
-  (define-key evil-normal-state-map (kbd "C-n") 'next-buffer)
-  (define-key evil-normal-state-map (kbd "C-p") 'previous-buffer)
-  (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
-  (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
-  (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
-  (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+  (define-key evil-motion-state-map (kbd "C-n") 'next-buffer)
+  (define-key evil-motion-state-map (kbd "C-p") 'previous-buffer)
+  (define-key evil-motion-state-map (kbd "C-l") 'evil-window-right)
+  (define-key evil-motion-state-map (kbd "C-h") 'evil-window-left)
+  (define-key evil-motion-state-map (kbd "C-j") 'evil-window-down)
+  (define-key evil-motion-state-map (kbd "C-k") 'evil-window-up)
+  (define-key evil-motion-state-map (kbd "C-f") 'projectile-find-file)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -362,10 +374,39 @@ This function is called at the very end of Spacemacs initialization."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
+ '(beacon-color "#d33682")
+ '(evil-want-Y-yank-to-eol nil)
+ '(fci-rule-color "#073642")
+ '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
+ '(frame-background-mode (quote dark))
  '(org-agenda-files (quote ("~/test.org")))
  '(package-selected-packages
    (quote
-    (color-theme-sanityinc-solarized go-guru go-eldoc company-go go-mode unfill smeargle orgit mwim magit-gitflow magit-popup helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit transient git-commit with-editor auto-dictionary mmm-mode markdown-toc markdown-mode gh-md helm-company helm-c-yasnippet fuzzy company-web web-completion-data company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+    (yapfify yaml-mode utop tuareg caml seeing-is-believing rvm ruby-tools ruby-test-mode ruby-refactor ruby-hash-syntax rubocopfmt rubocop rspec-mode robe rbenv rake pytest pyenv-mode py-isort pippel pipenv pyvenv pip-requirements ocp-indent ob-elixir nodejs-repl mvn minitest meghanada maven-test-mode lsp-ui lsp-treemacs lsp-python-ms python lsp-java livid-mode skewer-mode live-py-mode json-navigator hierarchy json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc importmagic epc ctable concurrent deferred helm-pydoc helm-lsp groovy-mode groovy-imports pcache gradle-mode git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter flycheck-ocaml merlin flycheck-mix flycheck-credo emojify emoji-cheat-sheet-plus dune diff-hl cython-mode company-tern tern company-lsp lsp-mode dash-functional company-emoji company-anaconda chruby bundler inf-ruby browse-at-remote blacken auto-complete-rst anaconda-mode pythonic alchemist elixir-mode go-guru go-eldoc company-go go-mode unfill smeargle orgit mwim magit-gitflow magit-popup helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck evil-magit magit transient git-commit with-editor auto-dictionary mmm-mode markdown-toc markdown-mode gh-md helm-company helm-c-yasnippet fuzzy company-web web-completion-data company-statistics company auto-yasnippet yasnippet ac-ispell auto-complete web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download htmlize gnuplot ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#dc322f")
+     (40 . "#cb4b16")
+     (60 . "#b58900")
+     (80 . "#859900")
+     (100 . "#2aa198")
+     (120 . "#268bd2")
+     (140 . "#d33682")
+     (160 . "#6c71c4")
+     (180 . "#dc322f")
+     (200 . "#cb4b16")
+     (220 . "#b58900")
+     (240 . "#859900")
+     (260 . "#2aa198")
+     (280 . "#268bd2")
+     (300 . "#d33682")
+     (320 . "#6c71c4")
+     (340 . "#dc322f")
+     (360 . "#cb4b16"))))
+ '(vc-annotate-very-old-color nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
