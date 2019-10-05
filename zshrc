@@ -9,7 +9,7 @@ TERM=xterm-256color
 export SHELL=`which zsh`                 # New shells don't open bash
 export EDITOR=vim                        # Use vim!
 export GREP_OPTIONS='--color=auto'       # Color my greps
-export GOPATH=$HOME/repo
+export GOPATH=$HOME/go
 if [ $(uname) = Linux ]; then 
     alias ls='ls --color=auto'
 else
@@ -17,9 +17,8 @@ else
 fi
 export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PERL5LIB='/Users/jlewis/.perl/'
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_91.jdk/Contents/Home/
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk-12.0.1.jdk/Contents/Home/
 export PLY_HOME=~/ext/ply/dist/ply
-export PATH=~/bin:/usr/local/go/bin:~/.cargo/bin:$PLY_HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:${GOPATH//://bin:}/bin:$PATH
 
 export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.5.5.0/jars"
 export EC2_PRIVATE_KEY="/Users/jordan/.aws/pk-IFJE2TQ7VDYZHJW4ER46OO7VGSSHVGDP.pem"
@@ -32,8 +31,6 @@ export AWS_CLOUDFORMATION_HOME="/usr/local/Cellar/aws-cfn-tools/1.0.9/jars/"
 export CLUSTER=Your Cluster Name Goes Here  # This will get changed based on the cluster you're working on.
 
 export C_INCLUDE_PATH=/usr/local/Cellar/zookeeper/3.4.3/include/zookeeper/
-
-typeset -U PATH
 
 export PYTHONSTARTUP="/Users/jordan/.pythonstartup"
 
@@ -334,4 +331,7 @@ bind-git-helper f b t r h
 unset -f bind-git-helper
 
 
-export PATH="/usr/local/opt/ccache/libexec:$HOME/.yarn/bin:$PATH:$GOPATH/src/github.com/cockroachlabs/production/crl-prod:$GOPATH/src/github.com/cockroachdb/cockroach/bin"
+source ~/.iterm2_shell_integration.zsh
+
+alias csql="~/go/src/github.com/cockroachdb/cockroach/cockroach sql --insecure"
+alias cdemo="~/go/src/github.com/cockroachdb/cockroach/cockroach demo --empty"
