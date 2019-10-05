@@ -333,7 +333,11 @@ let g:vimclojure#NailgunClient = "/usr/local/bin/ng"
 let g:solarized_visibility="normal"
 let g:solarized_underline=0
 "let g:solarized_termcolors=256
-set bg=dark
+if $ITERM_PROFILE=="Default light"
+    set bg=light
+else
+    set bg=dark
+endif
 colorscheme solarized
 
 let python_hilight_all=1
