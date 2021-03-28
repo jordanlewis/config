@@ -331,8 +331,5 @@ bind-git-helper() {
 bind-git-helper f b t r h
 unset -f bind-git-helper
 
-
-source ~/.iterm2_shell_integration.zsh
-
 alias csql="~/go/src/github.com/cockroachdb/cockroach/cockroach sql --insecure"
 alias cdemo="~/go/src/github.com/cockroachdb/cockroach/cockroach demo --empty"
