@@ -84,21 +84,21 @@ let g:gitgutter_sign_modified = '.'
 let g:gitgutter_sign_removed = '.'
 let g:gitgutter_sign_modified_removed = '.'
 
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_interfaces = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
+"let g:go_highlight_functions = 1
+"let g:go_highlight_methods = 1
+"let g:go_highlight_fields = 1
+"let g:go_highlight_structs = 1
+"let g:go_highlight_interfaces = 1
+"let g:go_highlight_operators = 1
+"let g:go_highlight_build_constraints = 1
 " These are kind of slow, let's turn them off for now
 " let g:go_auto_type_info = 1
 " let g:go_auto_sameids = 1
 let g:go_fmt_command = "goimports"
-autocmd FileType go set number fo+=croq tw=100
-autocmd Filetype go set makeprg=go\ build\ .
-autocmd Filetype go let g:neocomplete#enable_at_startup = 1
-autocmd Filetype golet g:neocomplete#enable_smart_case = 1
+"autocmd FileType go set number fo+=croq tw=100
+"autocmd Filetype go set makeprg=go\ build\ .
+"autocmd Filetype go let g:neocomplete#enable_at_startup = 1
+"autocmd Filetype golet g:neocomplete#enable_smart_case = 1
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
@@ -338,7 +338,7 @@ if $ITERM_PROFILE=="Default light"
 else
     set bg=dark
 endif
-colorscheme solarized
+colorscheme gruvbox
 
 let python_hilight_all=1
 

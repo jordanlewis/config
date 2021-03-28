@@ -94,3 +94,6 @@
 [submodule "vim/bundle/vim-gitgutter"]
 	path = vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter
+[submodule "vim/bundle/gruvbox"]
+	path = vim/bundle/gruvbox
+	url = git@github.com:morhetz/gruvbox
