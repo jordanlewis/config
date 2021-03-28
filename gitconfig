@@ -44,6 +44,8 @@
 
     last = for-each-ref --sort=-committerdate --count=20 --format='%(align:30,left)%(refname:short)%(end)%(committerdate:relative)' refs/heads/
 
+    cane = commit --amend --no-edit
+
 [merge]
     conflictstyle = diff3
     defaultToUpstream = true
@@ -51,7 +53,7 @@
 [rerere]
     enabled = 1
 [push]
-    default = simple
+    default = current
 [pull]
     rebase = true
 [rebase]
@@ -85,3 +87,5 @@
     #gpgsign = true
 [http]
 	cookiefile = /Users/jordan/.gitcookies
+[cockroachdb]
+	disable-commit-template = true
