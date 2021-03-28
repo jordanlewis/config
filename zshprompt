@@ -167,8 +167,13 @@ git_path() {
 }
 
 gitinfo_preexec() {
-	if [[ $2 == git\ * ]] || [[ $2 == *\ git\ * ]]; then
-		gitinfo[do_update]=1
+    if [[ $2 =~ '(.*)git (.*)' ]]; then
+        # Don't update if git status, git ls, etc.
+        local args=$match[2]
+        if [[ $args =~ '(status|ls|ls-files|log|lg|shortlog|last|diff|diffstat|show).*' ]]; then
+        else
+            gitinfo[do_update]=1
+        fi
 	fi
 }
 
