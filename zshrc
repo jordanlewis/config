@@ -117,7 +117,7 @@ else
 fi
 which git-number &> /dev/null
 if [ $? -eq 0 ]; then
-    numbercommands=(add rm diff reset checkout co)
+    numbercommands=(add rm diff reset checkout co restore)
     git()
     {
         if [ $1 = "status" ]; then
@@ -253,12 +253,13 @@ fzf-history-widget-accept() {
   return $ret
 }
 export FZF_CTRL_T_OPTS="--bind=ctrl-d:preview-page-down,ctrl-u:preview-page-up --preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+export FZF_CTRL_T_COMMAND="rg --files"
 export FZF_CTRL_R_OPTS="--height 5 --inline-info"
 zle     -N   fzf-file-widget
 bindkey '^F' fzf-file-widget
 zle     -N     fzf-history-widget-accept
 bindkey '^R' fzf-history-widget-accept
-export FZF_DEFAULT_COMMAND='rg --files -g ""'
+export FZF_DEFAULT_COMMAND='rg --files'
 
 # GIT heart FZF
 # -------------
