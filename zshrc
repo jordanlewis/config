@@ -17,7 +17,7 @@ else
 fi
 export NNTPSERVER=news-server.nyc.rr.com # Use my ISP's news server
 export PERL5LIB='/Users/jlewis/.perl/'
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk-12.0.1.jdk/Contents/Home/
+#export JAVA_HOME=/Library/Java/JavaVirtualMachines/openjdk-12.0.1.jdk/Contents/Home/
 export PLY_HOME=~/ext/ply/dist/ply
 
 export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.5.5.0/jars"
@@ -61,12 +61,12 @@ setopt promptsubst
 setopt pushd_ignore_dups   # Don't push multiple copies of a directory
 # }}}
 # Autoloads {{{
-autoload -U compinit; compinit
+# compinit moved to after zplug to avoid duplicate calls
 autoload -U predict-on
 autoload -U edit-command-line
 autoload -U copy-earlier-word
 autoload -U add-zsh-hook
-autoload -U bashcompinit && bashcompinit
+# bashcompinit deferred to after compinit
 # }}}
 # Zle {{{
 zle -N predict-on;
@@ -197,13 +197,27 @@ alias -g W='|wc'                 # cat biglongfile W
 source ~/.zshprompt
 # }}}
 
-# zplug {{{
-export ZPLUG_HOME=/usr/local/opt/zplug
-source $ZPLUG_HOME/init.zsh
-zplug "zsh-users/zsh-syntax-highlighting"
-zplug "changyuheng/fz", defer:1
-zplug "rupa/z", use:z.sh
-zplug load
+# zinit {{{
+source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
+
+# Load z immediately (needed for cd behavior)
+zinit light rupa/z
+
+# Deferred plugins (load after prompt)
+zinit ice wait lucid; zinit light changyuheng/fz
+zinit ice wait lucid; zinit light zsh-users/zsh-syntax-highlighting
+
+# Optimized compinit with caching - only rebuild if dump is old
+autoload -Uz compinit
+() {
+  setopt local_options extendedglob
+  if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+    compinit
+  else
+    compinit -C
+  fi
+}
+autoload -U bashcompinit && bashcompinit
 # }}}
 
 # Print to stdout {{{
@@ -272,7 +286,7 @@ fzf-down() {
   fzf --height 50% "$@" --border
 }
 
-gf() {
+ggf() {
   is_in_git_repo || return
   git -c color.status=always status --short |
   fzf-down -m --ansi --nth 2..,.. \
@@ -280,7 +294,7 @@ gf() {
   cut -c4- | sed 's/.* -> //'
 }
 
-gb() {
+ggb() {
   is_in_git_repo || return
   git branch -a --color=always | grep -v '/HEAD\s' | sort |
   fzf-down --ansi --multi --tac --preview-window right:70% \
@@ -289,14 +303,14 @@ gb() {
   sed 's#^remotes/##'
 }
 
-gt() {
+ggt() {
   is_in_git_repo || return
   git tag --sort -version:refname |
   fzf-down --multi --preview-window right:70% \
     --preview 'git show --color=always {} | head -'$LINES
 }
 
-gh() {
+ggh() {
   is_in_git_repo || return
   git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph --color=always |
   fzf-down --ansi --no-sort --reverse --multi --bind 'ctrl-s:toggle-sort' \
@@ -305,7 +319,7 @@ gh() {
   grep -o "[a-f0-9]\{7,\}"
 }
 
-gr() {
+ggr() {
   is_in_git_repo || return
   git remote -v | awk '{print $1 "\t" $2}' | uniq |
   fzf-down --tac \
@@ -323,7 +337,7 @@ join-lines() {
 bind-git-helper() {
   local c
   for c in $@; do
-    eval "fzf-g$c-widget() { local result=\$(g$c | join-lines); zle reset-prompt; LBUFFER+=\$result }"
+    eval "fzf-g$c-widget() { local result=\$(gg$c | join-lines); zle reset-prompt; LBUFFER+=\$result }"
     eval "zle -N fzf-g$c-widget"
     eval "bindkey '^g^$c' fzf-g$c-widget"
   done
@@ -331,5 +345,35 @@ bind-git-helper() {
 bind-git-helper f b t r h
 unset -f bind-git-helper
 
-alias csql="~/go/src/github.com/cockroachdb/cockroach/cockroach sql --insecure"
-alias cdemo="~/go/src/github.com/cockroachdb/cockroach/cockroach demo --empty"
+alias csql="~/dev/cockroach/cockroach sql --insecure"
+alias cdemo="~/dev/cockroach/cockroach demo --empty"
+
+export PATH=$PATH:$HOME/go/bin
+
+# add Pulumi to the PATH
+export PATH=$PATH:$HOME/.pulumi/bin
+export CLAUDE_CODE_USE_VERTEX=1
+export CLOUD_ML_REGION=us-east5
+export ANTHROPIC_VERTEX_PROJECT_ID=vertex-model-runners
+export GOOGLE_CLOUD_PROJECT=vertex-model-runners
+export GOOGLE_CLOUD_LOCATION=global
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/jordan/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+# bun completions
+[ -s "/Users/jordan/.bun/_bun" ] && source "/Users/jordan/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/jordan/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+export NODE_EXTRA_CA_CERTS="$HOME/.claude/ca_certs.pembundle"

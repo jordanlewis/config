@@ -1,11 +1,12 @@
 [core]
-    editor = vim
+    #editor = cat
     excludesfile = ~/.gitignore
     pager = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight | less
     preloadindex = true
+    #pager = cat
 [user]
-    email = jordanthelewis@gmail.com
-    name = Jordan Lewis
+	email = jordanthelewis@gmail.com
+	name = Jordan Lewis
     signingkey = 3A08059A
 [github]
 	user = jordanlewis
@@ -72,11 +73,11 @@
 [difftool "delta"]
     cmd = delta "$LOCAL" "$REMOTE" "$MERGED"
 [pager]
-	log = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight | less
-	show = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight | less
-	diff = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight | less
+    #log = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight | less
+	#show = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight | less
+	#diff = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight | less
 [interactive]
-	diffFilter = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight
+    #diffFilter = `git --exec-path`/../../share/git-core/contrib/diff-highlight/diff-highlight
 	singleKey = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -89,3 +90,11 @@
 	cookiefile = /Users/jordan/.gitcookies
 [cockroachdb]
 	disable-commit-template = true
+[init]
+	defaultBranch = main
+[credential "https://github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/opt/homebrew/bin/gh auth git-credential

@@ -130,7 +130,7 @@ gitinfo_update() {
 	gitinfo[msg]=" $gitinfo[op] $gitinfo[op_msg]"
 }
 
-gitinfo_update
+# gitinfo_update called lazily via chpwd hook, not at startup
 
 git_status() {
 	if [[ -z $gitinfo[dir] ]]; then
@@ -190,4 +190,8 @@ add-zsh-hook precmd gitinfo_precmd
 
 PS1='%F{yellow}[%T%F{cyan}%1(j.%%%F{green}%j%F{cyan}.)%0(?..:%F{red}%B%?%b)%F{yellow}]%F{cyan}%# %f'
 RPS1='%100>..>%F{cyan}%n%f%B@%b%F{cyan}%m%f%B:%b%<<%F{cyan}$(git_path)$gitinfo[msg]%b%k%f'
+
+if [[ $TERM_PROGRAM == "WarpTerminal" ]]; then
+    PS1="$PS1      $RPS1"
+fi
 

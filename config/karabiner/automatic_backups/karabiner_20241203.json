@@ -5,35 +5,6 @@
             "complex_modifications": {
                 "rules": [
                     {
-                        "description": "Google Chrome: Control Tab -> Control Shift W for CLUT (MRU tabswitch) extension",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "bundle_identifiers": [
-                                            "^com\\.google\\.Chrome$"
-                                        ],
-                                        "type": "frontmost_application_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "tab",
-                                    "modifiers": {
-                                        "mandatory": ["control"],
-                                        "optional": ["any"]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "w",
-                                        "modifiers": ["control", "shift"]
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Escape to Control on press and hold.",
                         "manipulators": [
                             {
@@ -94,19 +65,6 @@
                         {
                             "from": { "key_code": "left_option" },
                             "to": [{ "key_code": "left_command" }]
-                        }
-                    ]
-                },
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "product_id": 8790,
-                        "vendor_id": 51984
-                    },
-                    "simple_modifications": [
-                        {
-                            "from": { "key_code": "left_option" },
-                            "to": [{ "key_code": "right_option" }]
                         }
                     ]
                 }

@@ -96,19 +96,6 @@
                             "to": [{ "key_code": "left_command" }]
                         }
                     ]
-                },
-                {
-                    "identifiers": {
-                        "is_keyboard": true,
-                        "product_id": 8790,
-                        "vendor_id": 51984
-                    },
-                    "simple_modifications": [
-                        {
-                            "from": { "key_code": "left_option" },
-                            "to": [{ "key_code": "right_option" }]
-                        }
-                    ]
                 }
             ],
             "fn_function_keys": [
